@@ -2,36 +2,41 @@ import './App.css';
 import Footer from './components/footer';
 import Navbar from './components/navbar';
 
-import banner from './assets/bannerImg.svg';
 import about from './assets/about.svg';
+import banner from './assets/bannerImg.svg';
 import vision from './assets/visionImg.svg';
 
 import img1 from './assets/illustrations/img1.svg';
 import img2 from './assets/illustrations/img2.svg';
 import img3 from './assets/illustrations/img3.svg';
 import img4 from './assets/illustrations/img4.svg';
-import { Separator } from './components/ui/separator';
-import { Button } from './components/ui/button';
-import { services, testimonial } from './lib/utils';
+
 import ServiceCard from './components/serviceCard';
-import TestimonialCard from './components/testimonialCard';
+import { Button } from './components/ui/button';
+import { Separator } from './components/ui/separator';
+import { services } from './lib/data';
+
+import TestimonialCarousel from './components/testimonialsCarousel';
+
 function App() {
   return (
     <div className='app bg-black h-screen w-screen overflow-auto text-white flex flex-col justify-between'>
       <Navbar />
       {/* Banner */}
-      <div className="mx-auto w-full text-center pt-32 pb-7 px-6 lg:px-20">
-        <h1 className="relative text-3xl sm:text-5xl  font-bold font-syne text-center">
-          <img src={img1} alt="Illustration" className='absolute h-12 w-auto -top-24 left-56 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
-          <img src={img2} alt="Illustration" className='absolute h-14 w-auto -top-16 right-56 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
-          <img src={img3} alt="Illustration" className='absolute h-18 w-auto -bottom-28 right-32 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
-          <img src={img4} alt="Illustration" className='absolute h-14 w-auto -bottom-36 left-32 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
-          Transforming <span className='text-gradient font-syne'>Businesses</span> with <span className='text-gradient font-syne'>Generative AI</span>
-        </h1>
+      <div className="w-full h-screen text-center px-6 lg:px-20 pt-24 md:pt-32 pb-10 flex flex-col justify-end">
+        <div className="relative ">
+          <img src={img1} alt="Illustration" className='absolute h-9 md:h-12 w-auto -top-14 md:-top-24 left-20 md:left-56 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
+          <img src={img2} alt="Illustration" className='absolute h-10 md:h-14 w-auto -top-8 md:-top-16 right-2 md:right-56 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
+          <img src={img3} alt="Illustration" className='absolute h-16 md:h-18 w-auto -bottom-32 md:-bottom-28 right-9 md:right-32 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
+          <img src={img4} alt="Illustration" className='absolute h-10 md:h-14 w-auto -bottom-2 md:-bottom-16 md:left-24 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
+          <h1 className='text-3xl sm:text-5xl font-bold font-syne text-center'>
+            Transforming <span className='text-gradient font-syne'>Businesses</span> with <span className='text-gradient font-syne'>Generative AI</span>
+          </h1>
+        </div>
 
-        <p className="mx-auto mt-4 sm:text-xl/relaxed"> Troudz delivers AI-driven solutions to accelerate innovation and business success. </p>
+        <p className="mx-auto mt-4 sm:text-xl/relaxed font-syne"> Troudz delivers AI-driven solutions to accelerate innovation and business success. </p>
 
-        <img src={banner} alt="Banner Image" className='w-full sm:w-4/5 md:w-3/5 mx-auto mt-16' />
+        <img src={banner} alt="Banner Image" className='w-full sm:w-4/5 md:w-3/5 mx-auto mt-20' />
       </div>
       {/* About Section */}
       <div className="relative text-white py-16 px-6 lg:px-20 min-h-fit overflow-hidden">
@@ -76,15 +81,15 @@ function App() {
         </div>
       </div>
       {/* Vision Section */}
-      <div className="relative py-16 px-6 lg:px-20 min-h-fit overflow-hidden">
-        <div className="absolute -top-40 -right-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
+      <div className="relative py-16 px-6 lg:px-20 min-h-fit overflow-hidden bg-[url('./assets/visionBg.svg')] bg-cover">
+        <div className="absolute -top-40 -right-40 z-20  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-10 leading-none">
           What We Strive for
         </h1>
 
-        <div className=" z-10 max-w-6xl mx-auto py-5 ">
+        <div className="z-30 max-w-6xl mx-auto py-5 ">
           <h2 className="text-3xl font-semibold tracking-wide text-center lg:text-left"> OUR VISION </h2>
-          <p className="mt-8 w-5/6 mx-auto text-center text-lg lg:text-xl font-medium text-gray-200">
+          <p className="z-30 mt-8 w-5/6 mx-auto text-center text-lg lg:text-xl font-medium text-gray-200">
             At TroudZ, we envision a future where AI powers smarter and safer cities and industries.
             Specializing in AI-driven surveillance, our edge-optimized solutions deliver real-time analytics
             and insights, enabling cost-effective, scalable security for businesses.
@@ -101,45 +106,37 @@ function App() {
           </p>
         </div>
       </div>
-      <div className="relative py-16 px-6 lg:px-20">
+      <div className="relative py-16 px-6 lg:px-20 overflow-hidden min-h-fit">
+        <div className="absolute -bottom-32 -right-32 z-0  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <div className="absolute -top-40 -left-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-10 leading-none">
           What We Do
         </h1>
         <div className=" z-10 max-w-6xl mx-auto py-5 ">
           <div className="flex justify-between">
-            <h2 className="text-3xl font-semibold tracking-wide text-center lg:text-left"> OUR VISION </h2>
+            <h2 className="text-3xl font-semibold tracking-wide text-center lg:text-left"> OUR SERVICES </h2>
             <Button className='font-bold'>DISCOVER MORE</Button>
           </div>
-          <div className='grid grid-cols-3 gap-3 mt-5'>
+          <div className='flex flex-wrap mt-5 md:p-7 justify-center items-stretch'>
             {
               services.map((e) => {
                 return (
-                  <ServiceCard title={e.title} img={e.img} id={e.id} para={e.para} link={e.link} />
+                  <div className={`z-20 p-1.5 w-full sm:w-1/2 ${[4, 5].includes(e.id) ? ' lg:w-2/5 ' : ' lg:w-1/3 '}`}>
+                    <ServiceCard title={e.title} img={e.img} id={e.id} para={e.para} link={e.link} />
+                  </div>
                 )
               })
             }
           </div>
         </div>
       </div>
-      <div className='relative flex flex-col gap-10 items-center my-5 px-6 lg:px-20'>
-        <div className="absolute -top-40 -right-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
+      <div className='relative flex flex-col gap-10 items-center my-5 px-6 lg:px-20 py-32 min-h-fit overflow-hidden'>
         <div className="absolute -bottom-40 -left-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <div className="absolute -bottom-40 -right-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <h2 className="text-3xl font-semibold tracking-wide text-center lg:text-left"> TESTIMONIALS </h2>
         <h2 className="text-5xl font-semibold tracking-wide text-center lg:text-left"> What Our Clients Says </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 space-x-1">
-          {
-            testimonial.map((e) => {
-              return (
-                <TestimonialCard name={e.name} ratings={e.ratings} review={e.review} img={e.img} id={e.id} />
-              )
-            })
-          }
-        </div>
+        <TestimonialCarousel />
       </div>
-
-
       <Footer />
     </div>
   )

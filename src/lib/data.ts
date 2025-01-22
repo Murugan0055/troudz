@@ -1,0 +1,101 @@
+
+// Service Icons
+import services1 from '../assets/servicesImages/img1.svg';
+import services2 from '../assets/servicesImages/img2.svg';
+import services3 from '../assets/servicesImages/img3.svg';
+import services4 from '../assets/servicesImages/img4.svg';
+import services5 from '../assets/servicesImages/img5.svg';
+import services6 from '../assets/servicesImages/img6.svg';
+import services7 from '../assets/servicesImages/img7.svg';
+import services8 from '../assets/servicesImages/img8.svg';
+
+// testimonial profiles
+import img1 from '../assets/testimonials/img1.svg';
+import img2 from '../assets/testimonials/img2.svg';
+import img3 from '../assets/testimonials/img3.svg';
+
+import { ServicesType, TestimonialType } from './types';
+
+export const services: ServicesType[] = [
+    {
+        id: 1,
+        img: services1,
+        title: "Intelligent Task Automation",
+        para: "Automate tasks, improve efficiency, and support smarter decision-making, optimizing business operations with minimal human intervention.",
+        link: "Learn More"
+    },
+    {
+        id: 2,
+        img: services2,
+        title: "AI-Powered Assistants",
+        para: "Leverage natural language processing to assist users in completing tasks, boosting productivity, and enhancing customer service interactions.",
+        link: "Learn More"
+    },
+    {
+        id: 3,
+        img: services3,
+        title: "AI-Enhanced Copilots",
+        para: "Support human performance and decision-making in specific domains, fostering collaboration and enhancing overall efficiency.",
+        link: "Learn More"
+    },
+    {
+        id: 4,
+        img: services4,
+        title: "Smart Conversational Solutions",
+        para: "Streamline business operations, elevate customer service, and provide personalized interactions that drive satisfaction and engagement.",
+        link: "Learn More"
+    },
+    {
+        id: 5,
+        img: services5,
+        title: "Predictive Insights",
+        para: "Analyze historical data to predict future trends, behaviors, and outcomes, enabling businesses to make data-driven decisions with confidence.",
+        link: "Learn More"
+    },
+    {
+        id: 6,
+        img: services6,
+        title: "Data Intelligence & Enrichment",
+        para: "Enhance business intelligence by providing valuable insights that foster competitiveness in today's data-driven marketplaces.",
+        link: "Learn More"
+    },
+    {
+        id: 7,
+        img: services7,
+        title: "AI-Driven Creativity and Strategy",
+        para: "Empower human creativity and strategy by automating repetitive tasks, freeing up time for higher-value and impactful endeavors.",
+        link: "Learn More"
+    },
+    {
+        id: 8,
+        img: services8,
+        title: "Resource Management & Optimization",
+        para: "Efficiently manage and allocate resources, ensuring that businesses are equipped with the right talent and tools to drive success and maximize productivity.",
+        link: "Learn More"
+    }
+]
+
+
+export const testimonial: TestimonialType[] = [
+    {
+        id: 1,
+        img: img1,
+        name: "Marrc Benioff",
+        ratings: 5,
+        review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
+    },
+    {
+        id: 2,
+        img: img2,
+        name: "Selena Gomez",
+        ratings: 5,
+        review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
+    },
+    {
+        id: 3,
+        img: img3,
+        name: "Bruce Praison",
+        ratings: 5,
+        review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
+    }
+]

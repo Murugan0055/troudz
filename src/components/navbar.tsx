@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
 import { CgMenuLeft as MenuIcon } from "react-icons/cg";
 import { RxCross2 as Cross } from "react-icons/rx";
 
 
+import { useState } from 'react';
 import logo from '../assets/logo.svg';
 import { Button } from './ui/button';
-import { useState } from 'react';
 
 const Navbar = () => {
 
@@ -61,16 +60,16 @@ const Navbar = () => {
                             navigation.map((item, idx) => {
                                 return (
                                     <li key={idx} className="text-white hover:bg-gradient-to-r from-[#006CFC] to-[#00DDE8] bg-clip-text hover:text-transparent">
-                                        <a href='/' className="block text-lg font-medium">
+                                        <a href='/' className="block text-md md:text-lg font-medium">
                                             {item.title}
                                         </a>
                                     </li>
                                 )
                             })
                         }
-                        <div className='space-y-3 items-center gap-x-6 md:flex md:space-y-0'>
+                        <div className='items-center md:flex'>
                             <Button>
-                                <a href="/" className="block py-3 px-4 font-bold text-center text-white active:shadow-none shadow md:inline">
+                                <a href="/" className="block py-3 px-4 md:px-3 text-[15px] font-bold text-center text-white active:shadow-none shadow md:inline">
                                     GET STARTED
                                 </a>
                             </Button>

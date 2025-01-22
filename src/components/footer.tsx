@@ -9,28 +9,24 @@ import { Separator } from './ui/separator';
 function Footer() {
     return (
         <footer className="z-20 mx-auto w-full px-4 sm:px-6 lg:px-20 pt-14 pb-5 lg:grid lg:grid-cols-1">
-            <div className="grid grid-cols-3 gap-8 sm:grid-cols-5">
-                <div className="col-span-3 sm:col-span-2 max-w-xl mx-auto sm:order-last ">
+            <div className="grid grid-cols-4 gap-8 sm:grid-cols-5">
+                <div className="col-span-3 md:col-span-2 max-w-3xl sm:order-last">
                     <div className="space-y-5">
                         <h3 className="text-xl text-white font-bold"> Subscribe To Newsletter </h3>
                     </div>
-                    <div className="mt-6">
-                        <form
-                            onSubmit={(e) => e.preventDefault()}
-                            className="items-center justify-center sm:flex">
-                            <Input
-                                type="email"
-                                placeholder="Enter your email"
-                                className="text-gray-500 w-full p-5 border outline-none focus:border-indigo-600 rounded-full"
-                            />
-                            <Button className="w-full mt-3 px-5 py-3 rounded-full text-white duration-150 outline-none shadow-md focus:shadow-none focus:ring-2 ring-offset-2 ring-indigo-600 sm:mt-0 sm:ml-3 sm:w-auto">
-                                SUBSCRIBE
-                            </Button>
-                        </form>
+                    <div className="mt-6 flex flex-col sm:flex-row items-start">
+                        <Input
+                            type="email"
+                            placeholder="Enter your email"
+                            className="text-gray-500 p-5 border outline-none rounded-full"
+                        />
+                        <Button className="mt-3 px-5 py-3 rounded-full text-white border-none sm:mt-0 sm:ml-3">
+                            SUBSCRIBE
+                        </Button>
                     </div>
                 </div>
 
-                <div className='flex flex-col space-y-5'>
+                <div className='col-span-2 sm:col-span-1 flex flex-col space-y-5'>
                     <p className="font-medium text-white text-xl">Company</p>
                     <ul className="space-y-2.5 text-sm">
                         <li>
@@ -48,7 +44,7 @@ function Footer() {
                     </ul>
                 </div>
 
-                <div className='flex flex-col space-y-5'>
+                <div className='col-span-2 sm:col-span-1 flex flex-col space-y-5'>
                     <p className="font-medium text-white text-xl">Help</p>
                     <ul className="space-y-2.5 text-sm">
                         <li>
@@ -65,7 +61,7 @@ function Footer() {
                     </ul>
                 </div>
 
-                <div className='flex flex-col space-y-5'>
+                <div className='col-span-4 sm:col-span-3 md:col-span-1 flex flex-col space-y-5'>
                     <p className="font-medium text-white text-xl">Contact Us</p>
                     <ul className="space-y-2.5 text-sm">
                         <li> Troudz AI</li>
@@ -75,7 +71,7 @@ function Footer() {
                     </ul>
                 </div>
             </div>
-            <div className="flex justify-end space-x-4 py-6">
+            <div className="flex md:justify-end space-x-4 py-6">
                 <FB className='text-3xl text-slate-600' />
                 <Insta className='text-3xl text-slate-600' />
                 <YT className='text-3xl text-slate-600' />
