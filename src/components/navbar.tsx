@@ -8,7 +8,7 @@ import { Button } from './ui/button';
 
 const Navbar = () => {
 
-    const [sidebarOpen, setsSidebarOpen] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const navigation = [
         { title: "Home", path: "javascript:void(0)" },
@@ -20,7 +20,7 @@ const Navbar = () => {
 
     return (
         <nav className="w-full md:static md:text-sm">
-            <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
+            <div className={`items-center max-w-screen-xl mx-auto md:flex md:px-8 ${sidebarOpen ? 'px-0' : 'px-4'}`}>
                 <div className="flex items-center justify-between py-3 md:py-5 md:block">
                     <a href="/">
                         <img
@@ -31,15 +31,15 @@ const Navbar = () => {
                         />
                     </a>
                     <div className="md:hidden">
-                        <Button className="text-white text-3xl bg-none" onClick={() => setsSidebarOpen(!sidebarOpen)}>
-                            <MenuIcon className='text-2xl' />
+                        <Button className="text-white bg-none" onClick={() => setSidebarOpen(!sidebarOpen)}>
+                            <MenuIcon size={40} />
                         </Button>
                     </div>
                 </div>
-                <div className={`flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${sidebarOpen ? 'absolute block bg-black z-10 w-full h-full top-0 mt-0 p-5' : 'hidden'}`}>
+                <div className={`flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${sidebarOpen ? 'absolute block bg-black z-30 w-2/3 h-full top-0 mt-0 px-4 py-3 overflow-hidden' : 'hidden'}`}>
                     {
                         sidebarOpen ? (
-                            <div className='flex justify-between pe-5'>
+                            <div className='flex justify-between'>
                                 <a href="/">
                                     <img
                                         src={logo}
@@ -49,13 +49,13 @@ const Navbar = () => {
                                         className='mb-5'
                                     />
                                 </a>
-                                <Button className="text-white text-3xl bg-none" onClick={() => setsSidebarOpen(!sidebarOpen)}>
+                                <Button className="text-white text-3xl bg-none" onClick={() => setSidebarOpen(!sidebarOpen)}>
                                     <Cross className='text-2xl z-20' />
                                 </Button>
                             </div>
                         ) : null
                     }
-                    <ul className="justify-end items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
+                    <ul className={`justify-end items-center space-y-6 md:flex md:space-x-6 md:space-y-0 ${sidebarOpen ? 'px-2 mt-2' : ''}`}>
                         {
                             navigation.map((item, idx) => {
                                 return (

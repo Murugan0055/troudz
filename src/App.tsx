@@ -23,12 +23,12 @@ function App() {
     <div className='app bg-black h-screen w-screen overflow-auto text-white flex flex-col justify-between'>
       <Navbar />
       {/* Banner */}
-      <div className="w-full h-screen text-center px-6 lg:px-20 pt-24 md:pt-32 pb-10 flex flex-col justify-end">
+      <div className="w-full h-screen text-center px-3 lg:px-20 pt-24 md:pt-32 pb-14 flex flex-col justify-end">
         <div className="relative ">
-          <img src={img1} alt="Illustration" className='absolute h-9 md:h-12 w-auto -top-14 md:-top-24 left-20 md:left-56 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
-          <img src={img2} alt="Illustration" className='absolute h-10 md:h-14 w-auto -top-8 md:-top-16 right-2 md:right-56 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
-          <img src={img3} alt="Illustration" className='absolute h-16 md:h-18 w-auto -bottom-32 md:-bottom-28 right-9 md:right-32 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
-          <img src={img4} alt="Illustration" className='absolute h-10 md:h-14 w-auto -bottom-2 md:-bottom-16 md:left-24 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
+          <img src={img1} alt="Illustration" className='absolute h-9 md:h-12 w-auto -top-20 sm:-top-24 left-8 sm:left-56 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
+          <img src={img2} alt="Illustration" className='absolute h-14 md:h-14 w-auto -top-16 md:-top-16 right-6 md:right-56 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
+          <img src={img3} alt="Illustration" className='absolute h-20 md:h-18 w-auto -bottom-36 md:-bottom-28 right-9 md:right-32 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
+          <img src={img4} alt="Illustration" className='absolute h-10 md:h-14 w-auto -bottom-2 md:-bottom-2 lg:-bottom-16 -left-1 sm:left-5 md:left-16 lg:left-24 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
           <h1 className='text-3xl sm:text-5xl font-bold font-syne text-center'>
             Transforming <span className='text-gradient font-syne'>Businesses</span> with <span className='text-gradient font-syne'>Generative AI</span>
           </h1>
