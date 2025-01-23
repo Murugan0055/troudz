@@ -33,7 +33,7 @@ function App() {
   const [currScrollPosition, setCurrScrollPosition] = useState<number>(0)
   const [navStyle, setNavStyle] = useState<string>("")
   const [activeSection, setActiveSection] = useState<string>("home");
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(false); 
 
   //For scroll to top at the end of the page
   const topRef = useRef<HTMLDivElement>(null);
@@ -210,7 +210,7 @@ function App() {
         </div>
       </div>
       {/* Vision Section */}
-      <div id='vision' ref={visionRef} className="relative py-24 px-6 lg:px-20 min-h-fit overflow-hidden bg-[url('./assets/visionBg.svg')] bg-cover">
+      <div id='about' ref={visionRef} className="relative py-24 px-6 lg:px-20 min-h-fit overflow-hidden bg-[url('./assets/visionBg.svg')] bg-cover">
         <div className="absolute -top-40 -right-40 z-20  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
           What We Strive for
