@@ -30,7 +30,7 @@ const TestimonialCarousel = () => {
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-2 place-items-center place-content-center">
                 {
                     testimonial.slice(currentIndex, currentIndex + 3).map((e, i) => (
-                        <TestimonialCard className={i == 1 ? ' md:py-24 md:bg-[#1B255E] ' : ' md:h-fit '} testimonial={e} />
+                        <TestimonialCard key={i} className={i == 1 ? ' md:py-24 md:bg-[#1B255E] ' : ' md:h-fit '} testimonial={e} />
                     ))
                 }
             </div>

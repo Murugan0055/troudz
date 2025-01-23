@@ -1,26 +1,37 @@
+import { useState } from 'react';
 import { CgMenuLeft as MenuIcon } from "react-icons/cg";
 import { RxCross2 as Cross } from "react-icons/rx";
+import { FaArrowRight as ArrowRight } from "react-icons/fa";
 
-
-import { useState } from 'react';
 import logo from '../assets/logo.svg';
 import { Button } from './ui/button';
 
-const Navbar = () => {
+
+interface Props {
+    refs: React.RefObject<HTMLDivElement>[];
+    className: string,
+    activeSection: string;
+}
+
+const Navbar = ({ refs, className, activeSection }: Props) => {
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
+    const scrollTo = (ref: React.RefObject<HTMLDivElement>) => {
+        ref.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
     const navigation = [
-        { title: "Home", path: "javascript:void(0)" },
-        { title: "About Us", path: "javascript:void(0)" },
-        { title: "Services", path: "javascript:void(0)" },
-        { title: "Testimonial", path: "javascript:void(0)" },
-        { title: "Contact Us", path: "javascript:void(0)" },
+        { title: "Home", to: "home", ref: refs[0] },
+        { title: "About Us", to: "about", ref: refs[1] },
+        { title: "Services", to: "service", ref: refs[2] },
+        { title: "Testimonial", to: "testimonial", ref: refs[4] },
+        { title: "Contact Us", to: "contact", ref: refs[3] }
     ]
 
     return (
-        <nav className="w-full md:static md:text-sm">
-            <div className={`items-center max-w-screen-xl mx-auto md:flex md:px-8 ${sidebarOpen ? 'px-0' : 'px-4'}`}>
+        <nav className={`w-full absolute z-40 md:text-sm ${className}`}>
+            <div className={`items-center md:flex md:px-8 px-4`}>
                 <div className="flex items-center justify-between py-3 md:py-5 md:block">
                     <a href="/">
                         <img
@@ -31,16 +42,16 @@ const Navbar = () => {
                         />
                     </a>
                     <div className="md:hidden">
-                        <Button className="text-white bg-none" onClick={() => setSidebarOpen(!sidebarOpen)}>
-                            <MenuIcon size={40} />
-                        </Button>
+                        <button className="text-white text-2xl bg-none" onClick={() => setSidebarOpen(!sidebarOpen)}>
+                            <MenuIcon />
+                        </button>
                     </div>
                 </div>
-                <div className={`flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${sidebarOpen ? 'absolute block bg-black z-30 w-2/3 h-full top-0 mt-0 px-4 py-3 overflow-hidden' : 'hidden'}`}>
+                <div className={`flex-1 pb-3 md:block md:pb-0 md:mt-0 ${sidebarOpen ? 'absolute block bg-black z-30 w-2/3 h-screen top-0 right-0 mt-0 px-4 py-3' : 'hidden'}`}>
                     {
                         sidebarOpen ? (
-                            <div className='flex justify-between'>
-                                <a href="/">
+                            <div className='flex justify-end px-5 pt-2'>
+                                {/* <a href="/">
                                     <img
                                         src={logo}
                                         width={40}
@@ -48,29 +59,30 @@ const Navbar = () => {
                                         alt="Float UI logo"
                                         className='mb-5'
                                     />
-                                </a>
-                                <Button className="text-white text-3xl bg-none" onClick={() => setSidebarOpen(!sidebarOpen)}>
-                                    <Cross className='text-2xl z-20' />
-                                </Button>
+                                </a> */}
+                                <button className="text-white text-xl bg-none" onClick={() => setSidebarOpen(!sidebarOpen)}>
+                                    <Cross className='z-20' />
+                                </button>
                             </div>
                         ) : null
                     }
-                    <ul className={`justify-end items-center space-y-6 md:flex md:space-x-6 md:space-y-0 ${sidebarOpen ? 'px-2 mt-2' : ''}`}>
+                    <ul className={`justify-end items-center space-y-6 md:flex md:space-x-6 md:space-y-0 ${sidebarOpen ? 'px-2 mt-4' : ''}`}>
                         {
                             navigation.map((item, idx) => {
                                 return (
-                                    <li key={idx} className="text-white hover:bg-gradient-to-r from-[#006CFC] to-[#00DDE8] bg-clip-text hover:text-transparent">
-                                        <a href='/' className="block text-md md:text-lg font-medium">
+                                    <li key={idx} className="flex justify-center md:justify-start">
+                                        <Button onClick={() => { scrollTo(item.ref); setSidebarOpen(false) }} className={`bg-gradient-to-r from-[#006CFC] to-[#00DDE8] bg-clip-text hover:text-transparent text-md md:text-lg font-medium ${activeSection == item.to ? 'text-transparent' : 'text-white'}`}>
                                             {item.title}
-                                        </a>
+                                        </Button>
                                     </li>
                                 )
                             })
                         }
-                        <div className='items-center md:flex'>
+                        <div className='items-center justify-center flex'>
                             <Button>
-                                <a href="/" className="block py-3 px-4 md:px-3 text-[15px] font-bold text-center text-white active:shadow-none shadow md:inline">
+                                <a href="/" className="flex items-center justify-center gap-2 py-3 px-4 md:px-3 text-[15px] font-bold text-center text-white active:shadow-none shadow ">
                                     GET STARTED
+                                    <ArrowRight />
                                 </a>
                             </Button>
                         </div>

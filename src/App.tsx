@@ -1,6 +1,11 @@
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import Footer from './components/footer';
 import Navbar from './components/navbar';
+import TestimonialCarousel from './components/testimonialsCarousel';
+
+import logo from './assets/logo.svg';
 
 import about from './assets/about.svg';
 import banner from './assets/bannerImg.svg';
@@ -12,36 +17,160 @@ import img3 from './assets/illustrations/img3.svg';
 import img4 from './assets/illustrations/img4.svg';
 
 import ServiceCard from './components/serviceCard';
+
 import { Button } from './components/ui/button';
 import { Separator } from './components/ui/separator';
 import { services } from './lib/data';
 
-import TestimonialCarousel from './components/testimonialsCarousel';
+import { FaArrowRight as ArrowRight, FaArrowUp as UpArrow } from "react-icons/fa";
+
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import Shake from './components/animations/shake';
+
 
 function App() {
+  const appRef = useRef<HTMLDivElement>(null);
+  const [currScrollPosition, setCurrScrollPosition] = useState<number>(0)
+  const [navStyle, setNavStyle] = useState<string>("")
+  const [activeSection, setActiveSection] = useState<string>("home");
+  const [isLoading, setIsLoading] = useState(true); 
+
+  //For scroll to top at the end of the page
+  const topRef = useRef<HTMLDivElement>(null);
+
+  const scrollToTop = () => {
+    topRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  //To get the currect section
+  const homeRef = useRef<HTMLDivElement | null>(null);
+  const aboutRef = useRef<HTMLDivElement | null>(null);
+  const servicesRef = useRef<HTMLDivElement | null>(null);
+  const visionRef = useRef<HTMLDivElement | null>(null);
+  const testimonialRef = useRef<HTMLDivElement | null>(null);
+  const contactRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    // Handle page load
+    const handleLoad = () => {
+      setIsLoading(false);
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    // Handle scroll
+    const handleScroll = () => {
+      if (appRef.current) {
+        const scrollPosition = appRef.current.scrollTop;
+        setCurrScrollPosition(scrollPosition);
+
+        if (scrollPosition > 2 && scrollPosition < 150) {
+          setNavStyle("fade-out");
+        } else if (scrollPosition > 150) {
+          setNavStyle("fixed fade-in transition duration-700 bg-black/30 backdrop-blur-lg shadow-md");
+        } else if (scrollPosition < 150 && scrollPosition < 50) {
+          setNavStyle(" ");
+        }
+      }
+    };
+
+    const appElement = appRef.current;
+    if (appElement) {
+      appElement.addEventListener("scroll", handleScroll);
+    }
+
+    // Handle section intersection
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (homeRef.current) observer.observe(homeRef.current);
+    if (aboutRef.current) observer.observe(aboutRef.current);
+    if (servicesRef.current) observer.observe(servicesRef.current);
+    if (visionRef.current) observer.observe(visionRef.current);
+    if (testimonialRef.current) observer.observe(testimonialRef.current);
+    if (contactRef.current) observer.observe(contactRef.current);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+      if (appElement) {
+        appElement.removeEventListener("scroll", handleScroll);
+      }
+      observer.disconnect();
+    };
+  }, []);
+
+
+  if (isLoading) {
+    return (
+      <div className={`flex flex-col gap-2 justify-center items-center h-screen w-screen bg-black text-white ${isLoading ? 'fade-in' : null}`}>
+        <motion.span
+          animate={{ opacity: [0, 1, 0] }}
+          transition={{ duration: 4.0, repeat: Infinity }}
+          className="flex flex-col justify-center items-center gap-2 "
+        >
+          <img src={logo} alt="Troudz Logo" className='h-14 w-14' />
+          <h1 className="text-xl font-medium">Troudz.ai</h1>
+        </motion.span>
+
+        {/* <TypingEffect delay={100} duration={0.6} text='Optimizing solutions just for you. Hang tight!' textStyle='text-lg font-normal text-center' /> */}
+      </div>
+    )
+  }
+
   return (
-    <div className='app bg-black h-screen w-screen overflow-auto text-white flex flex-col justify-between'>
-      <Navbar />
+    <div ref={appRef} className='app fade-in bg-black h-screen w-screen overflow-auto text-white flex flex-col justify-between'>
+      <div ref={topRef}></div>
+      <Navbar refs={[homeRef, aboutRef, servicesRef, contactRef, testimonialRef]} className={navStyle} activeSection={activeSection} />
       {/* Banner */}
-      <div className="w-full h-screen text-center px-3 lg:px-20 pt-24 md:pt-32 pb-14 flex flex-col justify-end">
+      <div id='home' ref={homeRef} className="w-full h-screen text-center px-3 lg:px-20 pt-20 mt-24 md:pt-28 pb-14 flex flex-col justify-end">
         <div className="relative ">
-          <img src={img1} alt="Illustration" className='absolute h-9 md:h-12 w-auto -top-20 sm:-top-24 left-8 sm:left-56 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
-          <img src={img2} alt="Illustration" className='absolute h-14 md:h-14 w-auto -top-16 md:-top-16 right-6 md:right-56 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
-          <img src={img3} alt="Illustration" className='absolute h-20 md:h-18 w-auto -bottom-36 md:-bottom-28 right-9 md:right-32 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
-          <img src={img4} alt="Illustration" className='absolute h-10 md:h-14 w-auto -bottom-2 md:-bottom-2 lg:-bottom-16 -left-1 sm:left-5 md:left-16 lg:left-24 drop-shadow-[0_0_25px_rgba(255,255,255)]' />
+          <div className="absolute h-9 md:h-12 w-auto -top-20 sm:-top-24 left-8 sm:left-56 drop-shadow-[0_0_25px_rgba(255,255,255)]">
+            <Shake className="w-full h-full">
+              <img src={img1} alt="Illustration" className=' h-full w-full' />
+            </Shake>
+          </div>
+          <div className="absolute h-14 md:h-14 w-auto -top-16 md:-top-16 right-6 md:right-56 drop-shadow-[0_0_25px_rgba(255,255,255)]">
+            <Shake className="w-full h-full">
+              <img src={img2} alt="Illustration" className=' h-full w-full' />
+            </Shake>
+          </div>
+          <div className='absolute h-20 md:h-18 w-auto -bottom-36 md:-bottom-28 right-9 md:right-32 drop-shadow-[0_0_25px_rgba(255,255,255)]'>
+            <Shake className="w-full h-full">
+              <img src={img3} alt="Illustration" className=' h-full w-full' />
+            </Shake>
+          </div>
+          <div className='absolute h-10 md:h-12 w-auto -bottom-2 md:-bottom-2 lg:-bottom-16 -left-1 sm:left-5 md:left-16 lg:left-24 drop-shadow-[0_0_25px_rgba(255,255,255)]' >
+            <Shake className="w-full h-full">
+              <img src={img4} alt="Illustration" className=' h-full w-full' />
+            </Shake>
+          </div>
+
           <h1 className='text-3xl sm:text-5xl font-bold font-syne text-center'>
             Transforming <span className='text-gradient font-syne'>Businesses</span> with <span className='text-gradient font-syne'>Generative AI</span>
           </h1>
         </div>
 
         <p className="mx-auto mt-4 sm:text-xl/relaxed font-syne"> Troudz delivers AI-driven solutions to accelerate innovation and business success. </p>
-
-        <img src={banner} alt="Banner Image" className='w-full sm:w-4/5 md:w-3/5 mx-auto mt-20' />
+        <Button className="w-fit mx-auto mt-5">
+          <a href="/" className="flex items-center justify-center gap-2 py-3 px-4 md:px-3 text-[15px] font-bold text-center text-white active:shadow-none shadow">
+            GET STARTED
+            <ArrowRight />
+          </a>
+        </Button>
+        <img src={banner} alt="Banner Image" className='w-full sm:w-4/5 md:w-3/5 mx-auto mt-14' />
       </div>
       {/* About Section */}
-      <div className="relative text-white py-16 px-6 lg:px-20 min-h-fit overflow-hidden">
+      <div id='about' ref={aboutRef} className="relative py-24 px-6 lg:px-20 min-h-fit overflow-hidden">
         <div className="absolute -top-32 -left-40 z-0  h-[450px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
-        <h1 className="z-10 text-5xl lg:text-7xl text-center lg:text-left font-extrabold text-white opacity-10 leading-none">
+        <h1 className="z-30 text-5xl lg:text-7xl text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
           Why Troudz.ai
         </h1>
 
@@ -81,9 +210,9 @@ function App() {
         </div>
       </div>
       {/* Vision Section */}
-      <div className="relative py-16 px-6 lg:px-20 min-h-fit overflow-hidden bg-[url('./assets/visionBg.svg')] bg-cover">
+      <div id='vision' ref={visionRef} className="relative py-24 px-6 lg:px-20 min-h-fit overflow-hidden bg-[url('./assets/visionBg.svg')] bg-cover">
         <div className="absolute -top-40 -right-40 z-20  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
-        <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-10 leading-none">
+        <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
           What We Strive for
         </h1>
 
@@ -106,39 +235,67 @@ function App() {
           </p>
         </div>
       </div>
-      <div className="relative py-16 px-6 lg:px-20 overflow-hidden min-h-fit">
+      {/* Services */}
+      <div id='service' ref={servicesRef} className="relative py-24 px-6 lg:px-20 overflow-hidden min-h-fit">
         <div className="absolute -bottom-32 -right-32 z-0  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <div className="absolute -top-40 -left-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
-        <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-10 leading-none">
+        <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
           What We Do
         </h1>
         <div className=" z-10 max-w-6xl mx-auto py-5 ">
           <div className="flex justify-between">
-            <h2 className="text-3xl font-semibold tracking-wide text-center lg:text-left"> OUR SERVICES </h2>
-            <Button className='font-bold'>DISCOVER MORE</Button>
+            <h2 className="text-3xl font-semibold tracking-wide text-center w-full lg:text-left"> OUR SERVICES </h2>
+            <Button className='font-bold hidden lg:flex'>DISCOVER MORE</Button>
           </div>
           <div className='flex flex-wrap mt-5 md:p-7 justify-center items-stretch'>
             {
-              services.map((e) => {
+              services.map((e, i) => {
                 return (
                   <div className={`z-20 p-1.5 w-full sm:w-1/2 ${[4, 5].includes(e.id) ? ' lg:w-2/5 ' : ' lg:w-1/3 '}`}>
-                    <ServiceCard title={e.title} img={e.img} id={e.id} para={e.para} link={e.link} />
+                    <ServiceCard key={i} title={e.title} img={e.img} id={e.id} para={e.para} link={e.link} />
                   </div>
                 )
               })
             }
           </div>
         </div>
+        <div className="flex justify-center lg:hidden mt-2">
+          <Button className='font-bold z-30'>DISCOVER MORE</Button>
+
+        </div>
       </div>
-      <div className='relative flex flex-col gap-10 items-center my-5 px-6 lg:px-20 py-32 min-h-fit overflow-hidden'>
+      {/* Testimonials */}
+      <div id='testimonial' ref={testimonialRef} className='relative flex flex-col gap-10 px-6 lg:px-20 py-24 md:py-32 min-h-fit overflow-hidden'>
         <div className="absolute -bottom-40 -left-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <div className="absolute -bottom-40 -right-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
-        <h2 className="text-3xl font-semibold tracking-wide text-center lg:text-left"> TESTIMONIALS </h2>
-        <h2 className="text-5xl font-semibold tracking-wide text-center lg:text-left"> What Our Clients Says </h2>
+        <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
+          Our Clients Says
+        </h1>
+        <h2 className="text-3xl font-semibold tracking-wide text-center w-full lg:text-left"> TESTIMONIALS </h2>
         <TestimonialCarousel />
       </div>
-      <Footer />
-    </div>
+      <>
+        {
+          currScrollPosition > 600 ? (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button onClick={() => scrollToTop()} className='fixed bottom-10 right-10 bg-none z-30 bg-black border border-gray-700 w-fit py-6 self-end'>
+                    <UpArrow />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className='bg-gray-700 border-none text-white'>
+                  <p>Back to Top</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          ) : null
+        }
+      </>
+      <div id='contact' ref={contactRef}>
+        <Footer />
+      </div>
+    </div >
   )
 }
 
