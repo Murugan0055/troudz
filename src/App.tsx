@@ -25,7 +25,9 @@ import { services } from './lib/data';
 import { FaArrowRight as ArrowRight, FaArrowUp as UpArrow } from "react-icons/fa";
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import FadeInSection from "./components/animations/fadeInScroll";
 import Shake from './components/animations/shake';
+import Section from "./components/section";
 
 
 function App() {
@@ -33,7 +35,7 @@ function App() {
   const [currScrollPosition, setCurrScrollPosition] = useState<number>(0)
   const [navStyle, setNavStyle] = useState<string>("")
   const [activeSection, setActiveSection] = useState<string>("home");
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
 
   //For scroll to top at the end of the page
   const topRef = useRef<HTMLDivElement>(null);
@@ -42,21 +44,12 @@ function App() {
     topRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  //To get the currect section
-  const homeRef = useRef<HTMLDivElement | null>(null);
-  const aboutRef = useRef<HTMLDivElement | null>(null);
-  const servicesRef = useRef<HTMLDivElement | null>(null);
-  const visionRef = useRef<HTMLDivElement | null>(null);
-  const testimonialRef = useRef<HTMLDivElement | null>(null);
-  const contactRef = useRef<HTMLDivElement | null>(null);
-
   useEffect(() => {
     // Handle page load
     const handleLoad = () => {
       setIsLoading(false);
     };
 
-    window.addEventListener("load", handleLoad);
 
     // Handle scroll
     const handleScroll = () => {
@@ -75,40 +68,24 @@ function App() {
     };
 
     const appElement = appRef.current;
+
     if (appElement) {
       appElement.addEventListener("scroll", handleScroll);
     }
 
-    // Handle section intersection
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    if (homeRef.current) observer.observe(homeRef.current);
-    if (aboutRef.current) observer.observe(aboutRef.current);
-    if (servicesRef.current) observer.observe(servicesRef.current);
-    if (visionRef.current) observer.observe(visionRef.current);
-    if (testimonialRef.current) observer.observe(testimonialRef.current);
-    if (contactRef.current) observer.observe(contactRef.current);
+    document.addEventListener("DOMContentLoaded", handleLoad);
 
     return () => {
-      window.removeEventListener("load", handleLoad);
+      document.removeEventListener("DOMContentLoaded", handleLoad);
+
       if (appElement) {
         appElement.removeEventListener("scroll", handleScroll);
       }
-      observer.disconnect();
     };
   }, []);
 
 
-  if (isLoading) {
+  if (false) {
     return (
       <div className={`flex flex-col gap-2 justify-center items-center h-screen w-screen bg-black text-white ${isLoading ? 'fade-in' : null}`}>
         <motion.span
@@ -128,15 +105,16 @@ function App() {
   return (
     <div ref={appRef} className='app fade-in bg-black h-screen w-screen overflow-auto text-white flex flex-col justify-between'>
       <div ref={topRef}></div>
-      <Navbar refs={[homeRef, aboutRef, servicesRef, contactRef, testimonialRef]} className={navStyle} activeSection={activeSection} />
+      <Navbar className={navStyle} activeSection={activeSection} />
       {/* Banner */}
-      <div id='home' ref={homeRef} className="w-full h-screen text-center px-3 lg:px-20 pt-20 mt-24 md:pt-28 pb-14 flex flex-col justify-end">
+      <Section id="home" setActiveSection={(id: string) => setActiveSection(id)} className="w-full h-screen text-center px-3 lg:px-20 pt-20 mt-24 md:pt-28 pb-14 flex flex-col justify-end" >
         <div className="relative ">
           <div className="absolute h-9 md:h-12 w-auto -top-20 sm:-top-24 left-8 sm:left-56 drop-shadow-[0_0_25px_rgba(255,255,255)]">
             <Shake className="w-full h-full">
               <img src={img1} alt="Illustration" className=' h-full w-full' />
             </Shake>
           </div>
+          {/* <div className="h-3 w-3 rounded-full bg-[#000F2D]"></div> */}
           <div className="absolute h-14 md:h-14 w-auto -top-16 md:-top-16 right-6 md:right-56 drop-shadow-[0_0_25px_rgba(255,255,255)]">
             <Shake className="w-full h-full">
               <img src={img2} alt="Illustration" className=' h-full w-full' />
@@ -152,7 +130,6 @@ function App() {
               <img src={img4} alt="Illustration" className=' h-full w-full' />
             </Shake>
           </div>
-
           <h1 className='text-3xl sm:text-5xl font-bold font-syne text-center'>
             Transforming <span className='text-gradient font-syne'>Businesses</span> with <span className='text-gradient font-syne'>Generative AI</span>
           </h1>
@@ -166,9 +143,9 @@ function App() {
           </a>
         </Button>
         <img src={banner} alt="Banner Image" className='w-full sm:w-4/5 md:w-3/5 mx-auto mt-14' />
-      </div>
+      </Section>
       {/* About Section */}
-      <div id='about' ref={aboutRef} className="relative py-24 px-6 lg:px-20 min-h-fit overflow-hidden">
+      <Section id='about' setActiveSection={(id: string) => setActiveSection(id)} className="relative py-24 px-6 lg:px-20 ">
         <div className="absolute -top-32 -left-40 z-0  h-[450px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <h1 className="z-30 text-5xl lg:text-7xl text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
           Why Troudz.ai
@@ -208,35 +185,34 @@ function App() {
             </div>
           </div>
         </div>
-      </div>
-      {/* Vision Section */}
-      <div id='vision' ref={visionRef} className="relative py-24 px-6 lg:px-20 min-h-fit overflow-hidden bg-[url('./assets/visionBg.svg')] bg-cover">
-        <div className="absolute -top-40 -right-40 z-20  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
-        <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
-          What We Strive for
-        </h1>
+        <div className="relative mt-10">
+          <div className="absolute -top-40 -right-40 z-0  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
+          <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
+            What We Strive for
+          </h1>
 
-        <div className="z-30 max-w-6xl mx-auto py-5 ">
-          <h2 className="text-3xl font-semibold tracking-wide text-center lg:text-left"> OUR VISION </h2>
-          <p className="z-30 mt-8 w-5/6 mx-auto text-center text-lg lg:text-xl font-medium text-gray-200">
-            At TroudZ, we envision a future where AI powers smarter and safer cities and industries.
-            Specializing in AI-driven surveillance, our edge-optimized solutions deliver real-time analytics
-            and insights, enabling cost-effective, scalable security for businesses.
-          </p>
-          <img
-            src={vision}
-            alt="Our Vision Image"
-            className="w-[280px] lg:w-[300px] h-auto rounded-md my-10 mx-auto"
-          />
-          <p className="mt-8 w-5/6 mx-auto text-center text-lg lg:text-xl font-medium text-gray-200">
-            TroudZ delivers intelligent solutions for next-gen industries and safe cities, empowering
-            organizations to safeguard assets, operations, and people. We are redefining AI-powered surveillance,
-            enabling businesses and communities to thrive in a dynamic world.
-          </p>
+          <div className="z-30 max-w-6xl mx-auto py-5 ">
+            <h2 className="text-3xl font-semibold tracking-wide text-center lg:text-left"> OUR VISION </h2>
+            <p className="z-30 mt-8 w-5/6 mx-auto text-center text-lg lg:text-xl font-medium text-gray-200">
+              At TroudZ, we envision a future where AI powers smarter and safer cities and industries.
+              Specializing in AI-driven surveillance, our edge-optimized solutions deliver real-time analytics
+              and insights, enabling cost-effective, scalable security for businesses.
+            </p>
+            <img
+              src={vision}
+              alt="Our Vision Image"
+              className="w-[280px] lg:w-[300px] h-auto rounded-md my-10 mx-auto"
+            />
+            <p className="mt-8 w-5/6 mx-auto text-center text-lg lg:text-xl font-medium text-gray-200">
+              TroudZ delivers intelligent solutions for next-gen industries and safe cities, empowering
+              organizations to safeguard assets, operations, and people. We are redefining AI-powered surveillance,
+              enabling businesses and communities to thrive in a dynamic world.
+            </p>
+          </div>
         </div>
-      </div>
+      </Section>
       {/* Services */}
-      <div id='service' ref={servicesRef} className="relative py-24 px-6 lg:px-20 overflow-hidden min-h-fit">
+      <Section id='service' setActiveSection={(id: string) => setActiveSection(id)} className="relative py-24 px-6 lg:px-20 ">
         <div className="absolute -bottom-32 -right-32 z-0  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <div className="absolute -top-40 -left-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
@@ -245,7 +221,7 @@ function App() {
         <div className=" z-10 max-w-6xl mx-auto py-5 ">
           <div className="flex justify-between">
             <h2 className="text-3xl font-semibold tracking-wide text-center w-full lg:text-left"> OUR SERVICES </h2>
-            <Button className='font-bold hidden lg:flex'>DISCOVER MORE</Button>
+            {/* <Button className='font-bold hidden lg:flex'>DISCOVER MORE</Button> */}
           </div>
           <div className='flex flex-wrap mt-5 md:p-7 justify-center items-stretch'>
             {
@@ -259,13 +235,12 @@ function App() {
             }
           </div>
         </div>
-        <div className="flex justify-center lg:hidden mt-2">
+        {/* <div className="flex justify-center lg:hidden mt-2">
           <Button className='font-bold z-30'>DISCOVER MORE</Button>
-
-        </div>
-      </div>
+        </div> */}
+      </Section>
       {/* Testimonials */}
-      <div id='testimonial' ref={testimonialRef} className='relative flex flex-col gap-10 px-6 lg:px-20 py-24 md:py-32 min-h-fit overflow-hidden'>
+      <Section id='testimonial' setActiveSection={(id: string) => setActiveSection(id)} className='relative flex flex-col gap-10 px-6 lg:px-20 py-24 md:py-32 min-h-fit overflow-hidden'>
         <div className="absolute -bottom-40 -left-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <div className="absolute -bottom-40 -right-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
@@ -273,7 +248,7 @@ function App() {
         </h1>
         <h2 className="text-3xl font-semibold tracking-wide text-center w-full lg:text-left"> TESTIMONIALS </h2>
         <TestimonialCarousel />
-      </div>
+      </Section>
       <>
         {
           currScrollPosition > 600 ? (
@@ -292,9 +267,9 @@ function App() {
           ) : null
         }
       </>
-      <div id='contact' ref={contactRef}>
+      <Section id='contact' setActiveSection={(id: string) => setActiveSection(id)} className="">
         <Footer />
-      </div>
+      </Section>
     </div >
   )
 }

@@ -8,25 +8,28 @@ import { Button } from './ui/button';
 
 
 interface Props {
-    refs: React.RefObject<HTMLDivElement>[];
     className: string,
     activeSection: string;
 }
 
-const Navbar = ({ refs, className, activeSection }: Props) => {
+const Navbar = ({ className, activeSection }: Props) => {
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    const scrollTo = (ref: React.RefObject<HTMLDivElement>) => {
-        ref.current?.scrollIntoView({ behavior: "smooth" });
+    const scrollTo = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
     };
 
+
     const navigation = [
-        { title: "Home", to: "home", ref: refs[0] },
-        { title: "About Us", to: "about", ref: refs[1] },
-        { title: "Services", to: "service", ref: refs[2] },
-        { title: "Testimonial", to: "testimonial", ref: refs[4] },
-        { title: "Contact Us", to: "contact", ref: refs[3] }
+        { title: "Home", to: "home" },
+        { title: "About Us", to: "about" },
+        { title: "Services", to: "service" },
+        { title: "Testimonial", to: "testimonial" },
+        { title: "Contact Us", to: "contact" }
     ]
 
     return (
@@ -71,7 +74,7 @@ const Navbar = ({ refs, className, activeSection }: Props) => {
                             navigation.map((item, idx) => {
                                 return (
                                     <li key={idx} className="flex justify-center md:justify-start">
-                                        <Button onClick={() => { scrollTo(item.ref); setSidebarOpen(false) }} className={`bg-gradient-to-r from-[#006CFC] to-[#00DDE8] bg-clip-text hover:text-transparent text-md md:text-lg font-medium ${activeSection == item.to ? 'text-transparent' : 'text-white'}`}>
+                                        <Button onClick={() => { scrollTo(item.to); setSidebarOpen(false) }} className={`bg-gradient-to-r from-[#006CFC] to-[#00DDE8] bg-clip-text hover:text-transparent text-md md:text-lg font-medium ${activeSection == item.to ? 'text-transparent' : 'text-white'}`}>
                                             {item.title}
                                         </Button>
                                     </li>

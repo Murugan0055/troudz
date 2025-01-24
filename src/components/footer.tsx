@@ -79,7 +79,7 @@ function Footer() {
             </div>
             <Separator className='bg-gradient-to-r from-[#006CFC] to-[#00DDE8] mb-6 h-0.5 rounded-full' />
             <div className="flex justify-between">
-                <p className="text-sm text-gray-400">&copy; 2023 Troudz AI Labs</p>
+                <p className="text-sm text-gray-400">&copy; 2024 Troudz AI Labs</p>
                 <p className="text-sm text-gray-400"> All rights reserved.</p>
             </div>
         </footer>
