@@ -35,7 +35,7 @@ function App() {
   const [currScrollPosition, setCurrScrollPosition] = useState<number>(0)
   const [navStyle, setNavStyle] = useState<string>("")
   const [activeSection, setActiveSection] = useState<string>("home");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false); 
 
   //For scroll to top at the end of the page
   const topRef = useRef<HTMLDivElement>(null);
