@@ -19,7 +19,7 @@ const Navbar = ({ className, activeSection }: Props) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <nav className={`w-full absolute z-40 md:text-sm ${className}`}>
+        <nav className={`w-screen absolute z-40 md:text-sm ${className}`}>
             <div className={`items-center md:flex md:px-8 px-4`}>
                 <div className="flex items-center justify-between py-3 md:py-5 md:block">
                     <a href="/">
@@ -55,7 +55,7 @@ const Navbar = ({ className, activeSection }: Props) => {
                             </div>
                         ) : null
                     }
-                    <ul className={`justify-end items-center space-y-6 md:flex md:space-x-6 md:space-y-0 ${sidebarOpen ? 'px-2 mt-4' : ''}`}>
+                    <ul className={`justify-end items-center space-y-6 md:flex md:space-y-0  mt-4 ${sidebarOpen ? 'px-2' : ''}`}>
                         {
                             navigations.map((item, idx) => {
                                 return (

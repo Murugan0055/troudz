@@ -1,4 +1,4 @@
-import { useEffect, ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 interface Props {

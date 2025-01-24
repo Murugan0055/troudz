@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import Footer from './components/footer';
@@ -25,13 +26,16 @@ import { services } from './lib/data';
 import { FaArrowRight as ArrowRight, FaArrowUp as UpArrow } from "react-icons/fa";
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import FadeInSection from "./components/animations/fadeInScroll";
+import FadeInOnScroll from "./components/animations/fadeIn";
 import Shake from './components/animations/shake';
-import Section from "./components/section";
 import FlipText from "./components/animations/wordFlip";
+import Magnet from "./components/reactbits/Animations/Magnet/Magnet";
+import BlurText from "./components/reactbits/TextAnimations/BlurText/BlurText";
+import Section from "./components/section";
 
 
 function App() {
+  const [textLoaded, setTextLoaded] = useState(false);
   const appRef = useRef<HTMLDivElement>(null);
   const [currScrollPosition, setCurrScrollPosition] = useState<number>(0)
   const [navStyle, setNavStyle] = useState<string>("")
@@ -104,7 +108,7 @@ function App() {
   }
 
   return (
-    <div ref={appRef} className='app fade-in bg-black h-screen w-screen overflow-auto text-white flex flex-col justify-between'>
+    <div ref={appRef} className='app fade-in bg-black h-screen w-screen overflow-y-auto overflow-x-hidden text-white flex flex-col justify-between'>
       <div ref={topRef}></div>
       <Navbar className={navStyle} activeSection={activeSection} />
       {/* Banner */}
@@ -133,102 +137,180 @@ function App() {
               </Shake>
             </div>
           </>
-          <div className='flex gap-4 flex-wrap justify-center items-center text-3xl sm:text-5xl font-bold'>
-            <h1 className="font-syne">Transforming</h1>
-            <FlipText words={["Businesses", "Enterprises"]} duration={5000} className='w-[190px] md:w-[300px] font-syne text-gradient' />
-            <h1 className="font-syne">with</h1>
-            <FlipText words={["Generative AI", "Troudz"]} duration={3000} className='w-[400px] text-gradient text-center lg;text-left font-syne' />
+
+          <div className='flex gap-4 flex-wrap justify-center items-center font-bold'>
+            {
+              textLoaded ? (
+                <h1 className="text-3xl sm:text-5xl font-syne">Transforming</h1>
+              ) : (
+                <BlurText
+                  text="Transforming"
+                  delay={150}
+                  animateBy="letters"
+                  direction="top"
+                  onAnimationComplete={() => console.log("text")}
+                  className="text-3xl sm:text-5xl font-syne"
+                />
+              )
+            }
+            {
+              textLoaded ? (
+                <FlipText words={["Businesses", "Enterprises"]} duration={5000} className='sm:w-[190px] text-3xl sm:text-5xl md:w-[300px] font-syne text-gradient' />
+              ) : (
+                <BlurText
+                  text="Businesses"
+                  delay={200}
+                  animateBy="letters"
+                  direction="top"
+                  onAnimationComplete={() => console.log("text")}
+                  className="text-3xl sm:text-5xl font-syne syne text-gradient"
+                />
+              )
+            }
+            {
+              textLoaded ? (
+                <h1 className="text-3xl sm:text-5xl font-syne">with</h1>
+              ) : (
+                <BlurText
+                  text="with"
+                  delay={150}
+                  animateBy="letters"
+                  direction="top"
+                  onAnimationComplete={() => console.log("text")}
+                  className="text-3xl sm:text-5xl font-syne"
+                />
+              )
+            }
+            {
+              textLoaded ? (
+                <FlipText words={["Generative AI", "Our Troudz.ai"]} duration={3000} className='sm:w-[400px] text-3xl sm:text-5xl text-gradient text-center lg:text-left font-syne' />
+              ) : (
+                <BlurText
+                  text="Generative AI"
+                  delay={150}
+                  animateBy="letters"
+                  direction="top"
+                  onAnimationComplete={() => setTextLoaded(true)}
+                  className="text-3xl sm:text-5xl font-syne text-gradient"
+                />
+              )
+            }
           </div>
         </div>
 
         <p className="mx-auto mt-4 sm:text-xl/relaxed font-syne"> Troudz delivers AI-driven solutions to accelerate innovation and business success. </p>
-        <Button className="w-fit mx-auto mt-5">
-          <a href="/" className="flex items-center justify-center gap-2 py-3 px-4 md:px-3 text-[15px] font-bold text-center text-white active:shadow-none shadow">
-            GET STARTED
-            <ArrowRight />
-          </a>
-        </Button>
+
+        <Magnet padding={100} disabled={false} magnetStrength={10}>
+          <Button className="w-fit mx-auto mt-5">
+            <a href="/" className="flex items-center justify-center gap-2 py-3 px-4 md:px-3 text-[15px] font-bold text-center text-white active:shadow-none shadow">
+              GET STARTED
+              <ArrowRight />
+            </a>
+          </Button>
+        </Magnet>
+
         <img src={banner} alt="Banner Image" className='w-full sm:w-4/5 md:w-3/5 mx-auto mt-14' />
       </Section>
       {/* About Section */}
       <Section id='about' setActiveSection={(id: string) => setActiveSection(id)} className="relative px-6 pt-8 lg:px-20 ">
         <div className="z-10">
           <div className="absolute -top-32 -left-36 z-0  h-[450px] w-[450px] bg-[#131A44] blur-3xl rounded-full opacity-50"></div>
-          <h1 className="z-30 text-5xl lg:text-7xl text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
+          <FadeInOnScroll direction="left" className="fade-in z-30 text-5xl lg:text-7xl text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
             Why Troudz.ai
-          </h1>
+          </FadeInOnScroll>
 
           <div className=" z-30 max-w-6xl mx-auto py-5 ">
-            <h2 className="text-3xl font-semibold tracking-wide text-center lg:text-left"> ABOUT US </h2>
-            <p className="mt-8 z-10 w-5/6 mx-auto text-center text-lg lg:text-xl font-bold text-gray-200">
-              Welcome to <span className="text-gradient font-semibold">Troudz</span>,
-              an innovative AI-based startup dedicated to transforming businesses
-              through cutting-edge artificial intelligence solutions.
-            </p>
+            <FadeInOnScroll direction="left" delay={0.3} duration={0.4} className="text-3xl font-semibold tracking-wide text-center lg:text-left z-10"> ABOUT US </FadeInOnScroll>
+            <FadeInOnScroll direction="bottom" delay={0.3} duration={0.4}>
+              <p className="mt-8 z-10 w-5/6 mx-auto text-center text-lg lg:text-xl font-bold text-gray-200">
+                Welcome to <span className="text-gradient font-semibold">Troudz</span>,
+                an innovative AI-based startup dedicated to transforming businesses
+                through cutting-edge artificial intelligence solutions.
+              </p>
+            </FadeInOnScroll>
 
             <div className="relative mt-12 flex flex-col md:flex-row items-center justify-center gap-10">
               <Separator className='absolute bottom-0 bg-gradient-to-r from-[#006CFC] to-[#00DDE8] h-0.5 rounded-full z-10' />
-              <div className="overflow-hidden rounded-md shadow-lg">
-                <img
-                  src={about}
-                  alt="Illustration"
-                  className="w-[350px] lg:w-[400px] h-auto rounded-md"
-                />
-              </div>
+              <FadeInOnScroll direction="left" duration={0.5} delay={0.4}>
+                <div className="overflow-hidden rounded-md shadow-lg">
+                  <img
+                    src={about}
+                    alt="Illustration"
+                    className="w-[350px] lg:w-[400px] h-auto rounded-md"
+                  />
+                </div>
+              </FadeInOnScroll>
 
               <div className="text-gray-300 max-w-lg space-y-6 flex flex-col h-full justify-between">
-                <p className="leading-relaxed text-center md:text-left">
-                  Our mission is to leverage AI to drive growth, boost efficiency,
-                  and ignite innovation across industries. At Troudz, we deliver
-                  tailored AI solutions to solve challenges and create new
-                  opportunities in the digital era.
-                </p>
-                <p className="leading-relaxed text-center md:text-left">
-                  From optimizing operations to developing AI products and scaling
-                  talent, we’re your trusted partner for business success. Our
-                  expertise and industry knowledge ensure measurable results and
-                  lasting value.
-                </p>
+                <FadeInOnScroll direction="bottom" delay={0.3} duration={0.4}>
+                  <p className="leading-relaxed text-center md:text-left">
+                    Our mission is to leverage AI to drive growth, boost efficiency,
+                    and ignite innovation across industries. At Troudz, we deliver
+                    tailored AI solutions to solve challenges and create new
+                    opportunities in the digital era.
+                  </p>
+                </FadeInOnScroll>
+                <FadeInOnScroll direction="bottom" delay={0.3} duration={0.4}>
+                  <p className="leading-relaxed text-center md:text-left">
+                    From optimizing operations to developing AI products and scaling
+                    talent, we’re your trusted partner for business success. Our
+                    expertise and industry knowledge ensure measurable results and
+                    lasting value.
+                  </p>
+                </FadeInOnScroll>
               </div>
             </div>
           </div>
         </div>
         <div className="relative mt-10">
           <div className="absolute -top-40 -right-72 z-0  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
-          <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
-            What We Strive for
-          </h1>
+          <FadeInOnScroll direction="left">
+            <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
+              What We Strive for
+            </h1>
+          </FadeInOnScroll>
+
 
           <div className="z-30 max-w-6xl mx-auto py-5 ">
-            <h2 className="text-3xl font-semibold tracking-wide text-center lg:text-left"> OUR VISION </h2>
-            <p className="z-30 mt-8 w-5/6 mx-auto text-center text-lg lg:text-xl font-medium text-gray-200">
-              At TroudZ, we envision a future where AI powers smarter and safer cities and industries.
-              Specializing in AI-driven surveillance, our edge-optimized solutions deliver real-time analytics
-              and insights, enabling cost-effective, scalable security for businesses.
-            </p>
-            <img
-              src={vision}
-              alt="Our Vision Image"
-              className="w-[280px] lg:w-[300px] h-auto rounded-md my-10 mx-auto"
-            />
-            <p className="mt-8 w-5/6 mx-auto text-center text-lg lg:text-xl font-medium text-gray-200">
-              TroudZ delivers intelligent solutions for next-gen industries and safe cities, empowering
-              organizations to safeguard assets, operations, and people. We are redefining AI-powered surveillance,
-              enabling businesses and communities to thrive in a dynamic world.
-            </p>
+            <FadeInOnScroll direction="left" delay={0.3} duration={0.4} className="text-3xl font-semibold tracking-wide text-center lg:text-left"> OUR VISION </FadeInOnScroll>
+            <FadeInOnScroll direction="left" delay={0.3} duration={0.4}>
+              <p className="z-30 mt-8 w-5/6 mx-auto text-center text-lg lg:text-xl font-medium text-gray-200">
+                At TroudZ, we envision a future where AI powers smarter and safer cities and industries.
+                Specializing in AI-driven surveillance, our edge-optimized solutions deliver real-time analytics
+                and insights, enabling cost-effective, scalable security for businesses.
+              </p>
+            </FadeInOnScroll>
+            <FadeInOnScroll direction="bottom" delay={0.3} duration={0.4}>
+              <img
+                src={vision}
+                alt="Our Vision Image"
+                className="w-[280px] lg:w-[300px] h-auto rounded-md my-10 mx-auto"
+              />
+            </FadeInOnScroll>
+            <FadeInOnScroll direction="right" delay={0.3} duration={0.4}>
+              <p className="mt-8 w-5/6 mx-auto text-center text-lg lg:text-xl font-medium text-gray-200">
+                TroudZ delivers intelligent solutions for next-gen industries and safe cities, empowering
+                organizations to safeguard assets, operations, and people. We are redefining AI-powered surveillance,
+                enabling businesses and communities to thrive in a dynamic world.
+              </p>
+            </FadeInOnScroll>
           </div>
         </div>
-      </Section>
+      </Section >
       {/* Services */}
-      <Section id='service' setActiveSection={(id: string) => setActiveSection(id)} className="relative py-24 px-6 lg:px-20 ">
+      < Section id='service' setActiveSection={(id: string) => setActiveSection(id)} className="relative py-24 px-6 lg:px-20 " >
         <div className="absolute -bottom-32 -right-48 z-0  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-50"></div>
         <div className="absolute -top-40 -left-40 z-0  h-[400px] w-[450px] bg-[#131A44] blur-3xl rounded-full opacity-50"></div>
-        <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
-          What We Do
-        </h1>
+        <FadeInOnScroll direction="left">
+          <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
+            What We Do
+          </h1>
+        </FadeInOnScroll>
         <div className=" z-10 max-w-6xl mx-auto py-5 ">
           <div className="flex justify-between">
-            <h2 className="text-3xl font-semibold tracking-wide text-center w-full lg:text-left"> OUR SERVICES </h2>
+            <FadeInOnScroll direction="left" delay={0.3} duration={0.4} className="w-full">
+              <h2 className="text-3xl font-semibold tracking-wide text-center  w-full lg:text-left"> OUR SERVICES </h2>
+            </FadeInOnScroll>
             {/* <Button className='font-bold hidden lg:flex'>DISCOVER MORE</Button> */}
           </div>
           <div className='flex flex-wrap mt-5 md:p-7 justify-center items-stretch'>
@@ -246,17 +328,21 @@ function App() {
         {/* <div className="flex justify-center lg:hidden mt-2">
           <Button className='font-bold z-30'>DISCOVER MORE</Button>
         </div> */}
-      </Section>
+      </ Section >
       {/* Testimonials */}
-      <Section id='testimonial' setActiveSection={(id: string) => setActiveSection(id)} className='relative flex flex-col gap-10 px-6 lg:px-20 min-h-fit overflow-hidden'>
+      <Section id='testimonial' setActiveSection={(id: string) => setActiveSection(id)} className='relative flex flex-col gap-10 px-6 lg:px-20 min-h-fit overflow-hidden' >
         <div className="absolute -bottom-40 -left-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <div className="absolute -bottom-40 -right-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
-        <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
-          Our Clients Says
-        </h1>
-        <h2 className="text-3xl font-semibold tracking-wide text-center w-full lg:text-left"> TESTIMONIALS </h2>
+        <FadeInOnScroll direction="left">
+          <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
+            Our Clients Says
+          </h1>
+        </FadeInOnScroll>
+        <FadeInOnScroll direction="left" delay={0.3} duration={0.4}>
+          <h2 className="text-3xl font-semibold tracking-wide text-center w-full lg:text-left"> TESTIMONIALS </h2>
+        </FadeInOnScroll>
         <TestimonialCarousel />
-      </Section>
+      </Section >
       <>
         {
           currScrollPosition > 600 ? (

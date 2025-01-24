@@ -1,10 +1,10 @@
-import { ServicesType } from "@/lib/types"
-import FadeInSection from "./animations/fadeInScroll"
+import { ServicesType } from "@/lib/types";
+import SpotlightCard from "./reactbits/Components/SpotlightCard/SpotlightCard.js";
 
-
+// scaleOnHover={1.1} rotateAmplitude={14}
 function ServiceCard(data: ServicesType) {
     return (
-        <FadeInSection duration={0.3} from="left" delay={0} className={`group rounded-sm z-10 shadow-md h-full p-6 bg-gray-900 hover:bg-[#1B255E] transition duration-700 cursor-pointer`}>
+        <SpotlightCard className="group rounded-sm z-20 shadow-md h-full p-6 bg-gray-900 hover:bg-[#1B255E] transition duration-700 cursor-pointer" spotlightColor="#4d4e4e">
             <div className={`h-16 w-16 p-2 rounded-sm bg-gray-900 '}`}>
                 <img src={data.img} alt={data.title} className="object-cover object-center w-full h-full" />
             </div>
@@ -15,7 +15,7 @@ function ServiceCard(data: ServicesType) {
                 </div>
                 {/* <a href={data.link} type="button" className="text-gradient w-full font-semibold tracking-wide rounded-md">LEARN MORE</a> */}
             </div>
-        </FadeInSection >
+        </SpotlightCard>
     )
 }
 
