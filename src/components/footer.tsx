@@ -3,6 +3,8 @@ import { FaXTwitter as X } from "react-icons/fa6";
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Separator } from './ui/separator';
+import { navigations } from "@/lib/data";
+import { scrollTo } from "@/lib/utils";
 
 
 
@@ -29,18 +31,17 @@ function Footer() {
                 <div className='col-span-2 sm:col-span-1 flex flex-col space-y-5'>
                     <p className="font-medium text-white text-xl">Company</p>
                     <ul className="space-y-2.5 text-sm">
-                        <li>
-                            <a href="#" className="text-white transition hover:opacity-75"> About Us </a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-white transition hover:opacity-75"> Services </a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-white transition hover:opacity-75"> Pricing </a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-white transition hover:opacity-75"> Testimonials </a>
-                        </li>
+                        {
+                            navigations.map((item, idx) => {
+                                if (item.to != "contact" && item.to != "home") {
+                                    return (
+                                        <li key={idx} onClick={() => { scrollTo(item.to) }} className="text-white transition hover:opacity-75 cursor-pointer">
+                                            {item.title}
+                                        </li>
+                                    )
+                                }
+                            })
+                        }
                     </ul>
                 </div>
 

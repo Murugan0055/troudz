@@ -5,16 +5,16 @@ import Footer from './components/footer';
 import Navbar from './components/navbar';
 import TestimonialCarousel from './components/testimonialsCarousel';
 
-import logo from './assets/logo.svg';
+import logo from './assets/logo.webp';
 
-import about from './assets/about.svg';
-import banner from './assets/bannerImg.svg';
-import vision from './assets/visionImg.svg';
+import about from './assets/about.webp';
+import banner from './assets/bannerImg.webp';
+import vision from './assets/visionImg.webp';
 
-import img1 from './assets/illustrations/img1.svg';
-import img2 from './assets/illustrations/img2.svg';
-import img3 from './assets/illustrations/img3.svg';
-import img4 from './assets/illustrations/img4.svg';
+import img1 from './assets/illustrations/img1.webp';
+import img2 from './assets/illustrations/img2.webp';
+import img3 from './assets/illustrations/img3.webp';
+import img4 from './assets/illustrations/img4.webp';
 
 import ServiceCard from './components/serviceCard';
 
@@ -28,6 +28,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import FadeInSection from "./components/animations/fadeInScroll";
 import Shake from './components/animations/shake';
 import Section from "./components/section";
+import FlipText from "./components/animations/wordFlip";
 
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
   const [currScrollPosition, setCurrScrollPosition] = useState<number>(0)
   const [navStyle, setNavStyle] = useState<string>("")
   const [activeSection, setActiveSection] = useState<string>("home");
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
   //For scroll to top at the end of the page
   const topRef = useRef<HTMLDivElement>(null);
@@ -107,32 +108,37 @@ function App() {
       <div ref={topRef}></div>
       <Navbar className={navStyle} activeSection={activeSection} />
       {/* Banner */}
-      <Section id="home" setActiveSection={(id: string) => setActiveSection(id)} className="w-full h-screen text-center px-3 lg:px-20 pt-20 mt-24 md:pt-28 pb-14 flex flex-col justify-end" >
+      <Section id="home" setActiveSection={(id: string) => setActiveSection(id)} className="w-full h-screen text-center px-3 lg:px-10 pt-20 mt-24 pb-14 flex flex-col justify-end" >
         <div className="relative ">
-          <div className="absolute h-9 md:h-12 w-auto -top-20 sm:-top-24 left-8 sm:left-56 drop-shadow-[0_0_25px_rgba(255,255,255)]">
-            <Shake className="w-full h-full">
-              <img src={img1} alt="Illustration" className=' h-full w-full' />
-            </Shake>
+          <>
+            <div className="absolute h-9 md:h-12 w-auto -top-20 sm:-top-24 left-8 sm:left-56 drop-shadow-[0_0_25px_rgba(255,255,255)]">
+              <Shake className="w-full h-full">
+                <img src={img1} alt="Illustration" className=' h-full w-full' />
+              </Shake>
+            </div>
+            {/* <div className="h-3 w-3 rounded-full bg-[#000F2D]"></div> */}
+            <div className="absolute h-14 md:h-14 w-auto -top-16 md:-top-16 right-6 md:right-56 drop-shadow-[0_0_25px_rgba(255,255,255)]">
+              <Shake className="w-full h-full">
+                <img src={img2} alt="Illustration" className=' h-full w-full' />
+              </Shake>
+            </div>
+            <div className='absolute h-20 md:h-18 w-auto -bottom-36 md:-bottom-28 right-9 md:right-32 drop-shadow-[0_0_25px_rgba(255,255,255)]'>
+              <Shake className="w-full h-full">
+                <img src={img3} alt="Illustration" className=' h-full w-full' />
+              </Shake>
+            </div>
+            <div className='absolute h-10 md:h-12 w-auto -bottom-2 md:-bottom-2 lg:-bottom-16 -left-1 sm:left-5 md:left-16 lg:left-24 drop-shadow-[0_0_25px_rgba(255,255,255)]' >
+              <Shake className="w-full h-full">
+                <img src={img4} alt="Illustration" className=' h-full w-full' />
+              </Shake>
+            </div>
+          </>
+          <div className='flex gap-4 flex-wrap justify-center items-center text-3xl sm:text-5xl font-bold'>
+            <h1 className="font-syne">Transforming</h1>
+            <FlipText words={["Businesses", "Enterprises"]} duration={5000} className='w-[190px] md:w-[300px] font-syne text-gradient' />
+            <h1 className="font-syne">with</h1>
+            <FlipText words={["Generative AI", "Troudz"]} duration={3000} className='w-[400px] text-gradient text-center lg;text-left font-syne' />
           </div>
-          {/* <div className="h-3 w-3 rounded-full bg-[#000F2D]"></div> */}
-          <div className="absolute h-14 md:h-14 w-auto -top-16 md:-top-16 right-6 md:right-56 drop-shadow-[0_0_25px_rgba(255,255,255)]">
-            <Shake className="w-full h-full">
-              <img src={img2} alt="Illustration" className=' h-full w-full' />
-            </Shake>
-          </div>
-          <div className='absolute h-20 md:h-18 w-auto -bottom-36 md:-bottom-28 right-9 md:right-32 drop-shadow-[0_0_25px_rgba(255,255,255)]'>
-            <Shake className="w-full h-full">
-              <img src={img3} alt="Illustration" className=' h-full w-full' />
-            </Shake>
-          </div>
-          <div className='absolute h-10 md:h-12 w-auto -bottom-2 md:-bottom-2 lg:-bottom-16 -left-1 sm:left-5 md:left-16 lg:left-24 drop-shadow-[0_0_25px_rgba(255,255,255)]' >
-            <Shake className="w-full h-full">
-              <img src={img4} alt="Illustration" className=' h-full w-full' />
-            </Shake>
-          </div>
-          <h1 className='text-3xl sm:text-5xl font-bold font-syne text-center'>
-            Transforming <span className='text-gradient font-syne'>Businesses</span> with <span className='text-gradient font-syne'>Generative AI</span>
-          </h1>
         </div>
 
         <p className="mx-auto mt-4 sm:text-xl/relaxed font-syne"> Troudz delivers AI-driven solutions to accelerate innovation and business success. </p>
@@ -145,48 +151,50 @@ function App() {
         <img src={banner} alt="Banner Image" className='w-full sm:w-4/5 md:w-3/5 mx-auto mt-14' />
       </Section>
       {/* About Section */}
-      <Section id='about' setActiveSection={(id: string) => setActiveSection(id)} className="relative py-24 px-6 lg:px-20 ">
-        <div className="absolute -top-32 -left-40 z-0  h-[450px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
-        <h1 className="z-30 text-5xl lg:text-7xl text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
-          Why Troudz.ai
-        </h1>
+      <Section id='about' setActiveSection={(id: string) => setActiveSection(id)} className="relative px-6 pt-8 lg:px-20 ">
+        <div className="z-10">
+          <div className="absolute -top-32 -left-36 z-0  h-[450px] w-[450px] bg-[#131A44] blur-3xl rounded-full opacity-50"></div>
+          <h1 className="z-30 text-5xl lg:text-7xl text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
+            Why Troudz.ai
+          </h1>
 
-        <div className=" z-30 max-w-6xl mx-auto py-5 ">
-          <h2 className="text-3xl font-semibold tracking-wide text-center lg:text-left"> ABOUT US </h2>
-          <p className="mt-8 w-5/6 mx-auto text-center text-lg lg:text-xl font-bold text-gray-200">
-            Welcome to <span className="text-gradient font-semibold">Troudz</span>,
-            an innovative AI-based startup dedicated to transforming businesses
-            through cutting-edge artificial intelligence solutions.
-          </p>
+          <div className=" z-30 max-w-6xl mx-auto py-5 ">
+            <h2 className="text-3xl font-semibold tracking-wide text-center lg:text-left"> ABOUT US </h2>
+            <p className="mt-8 z-10 w-5/6 mx-auto text-center text-lg lg:text-xl font-bold text-gray-200">
+              Welcome to <span className="text-gradient font-semibold">Troudz</span>,
+              an innovative AI-based startup dedicated to transforming businesses
+              through cutting-edge artificial intelligence solutions.
+            </p>
 
-          <div className="relative mt-12 flex flex-col md:flex-row items-center justify-center gap-10">
-            <Separator className='absolute bottom-0 bg-gradient-to-r from-[#006CFC] to-[#00DDE8] h-0.5 rounded-full' />
-            <div className="overflow-hidden rounded-md shadow-lg">
-              <img
-                src={about}
-                alt="Illustration"
-                className="w-[350px] lg:w-[400px] h-auto rounded-md"
-              />
-            </div>
+            <div className="relative mt-12 flex flex-col md:flex-row items-center justify-center gap-10">
+              <Separator className='absolute bottom-0 bg-gradient-to-r from-[#006CFC] to-[#00DDE8] h-0.5 rounded-full z-10' />
+              <div className="overflow-hidden rounded-md shadow-lg">
+                <img
+                  src={about}
+                  alt="Illustration"
+                  className="w-[350px] lg:w-[400px] h-auto rounded-md"
+                />
+              </div>
 
-            <div className="text-gray-300 max-w-lg space-y-6 flex flex-col h-full justify-between">
-              <p className="leading-relaxed text-center md:text-left">
-                Our mission is to leverage AI to drive growth, boost efficiency,
-                and ignite innovation across industries. At Troudz, we deliver
-                tailored AI solutions to solve challenges and create new
-                opportunities in the digital era.
-              </p>
-              <p className="leading-relaxed text-center md:text-left">
-                From optimizing operations to developing AI products and scaling
-                talent, we’re your trusted partner for business success. Our
-                expertise and industry knowledge ensure measurable results and
-                lasting value.
-              </p>
+              <div className="text-gray-300 max-w-lg space-y-6 flex flex-col h-full justify-between">
+                <p className="leading-relaxed text-center md:text-left">
+                  Our mission is to leverage AI to drive growth, boost efficiency,
+                  and ignite innovation across industries. At Troudz, we deliver
+                  tailored AI solutions to solve challenges and create new
+                  opportunities in the digital era.
+                </p>
+                <p className="leading-relaxed text-center md:text-left">
+                  From optimizing operations to developing AI products and scaling
+                  talent, we’re your trusted partner for business success. Our
+                  expertise and industry knowledge ensure measurable results and
+                  lasting value.
+                </p>
+              </div>
             </div>
           </div>
         </div>
         <div className="relative mt-10">
-          <div className="absolute -top-40 -right-40 z-0  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
+          <div className="absolute -top-40 -right-72 z-0  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
           <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
             What We Strive for
           </h1>
@@ -213,8 +221,8 @@ function App() {
       </Section>
       {/* Services */}
       <Section id='service' setActiveSection={(id: string) => setActiveSection(id)} className="relative py-24 px-6 lg:px-20 ">
-        <div className="absolute -bottom-32 -right-32 z-0  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
-        <div className="absolute -top-40 -left-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
+        <div className="absolute -bottom-32 -right-48 z-0  h-[400px] w-[500px] bg-[#131A44] blur-3xl rounded-full opacity-50"></div>
+        <div className="absolute -top-40 -left-40 z-0  h-[400px] w-[450px] bg-[#131A44] blur-3xl rounded-full opacity-50"></div>
         <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">
           What We Do
         </h1>
@@ -240,7 +248,7 @@ function App() {
         </div> */}
       </Section>
       {/* Testimonials */}
-      <Section id='testimonial' setActiveSection={(id: string) => setActiveSection(id)} className='relative flex flex-col gap-10 px-6 lg:px-20 py-24 md:py-32 min-h-fit overflow-hidden'>
+      <Section id='testimonial' setActiveSection={(id: string) => setActiveSection(id)} className='relative flex flex-col gap-10 px-6 lg:px-20 min-h-fit overflow-hidden'>
         <div className="absolute -bottom-40 -left-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <div className="absolute -bottom-40 -right-40 z-0  h-[400px] w-[400px] bg-[#131A44] blur-3xl rounded-full opacity-65"></div>
         <h1 className="text-5xl lg:text-7xl z-10 text-center lg:text-left font-extrabold text-white opacity-30 leading-none">

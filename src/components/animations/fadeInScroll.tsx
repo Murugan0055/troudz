@@ -1,14 +1,21 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-const FadeInSection = ({ children }: { children: ReactNode }) => {
+interface Props {
+    children: ReactNode;
+    duration: number;
+    from: string;
+    delay: number;
+    className: string;
+}
+const FadeInSection = ({ children, duration, from, delay, className }: Props) => {
     const controls = useAnimation();
     const [ref, inView] = useInView({
         threshold: 0.1,
     });
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (inView) {
             controls.start("visible");
         } else {
@@ -16,9 +23,12 @@ const FadeInSection = ({ children }: { children: ReactNode }) => {
         }
     }, [controls, inView]);
 
-    const variants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 },
+    const variants = from == "down" ? {
+        hidden: { opacity: 0, y: 10 },
+        visible: { opacity: 1, y: 0 }
+    } : {
+        hidden: { opacity: 0, x: 10 },
+        visible: { opacity: 1, x: 0 },
     };
 
     return (
@@ -27,8 +37,8 @@ const FadeInSection = ({ children }: { children: ReactNode }) => {
             variants={variants}
             initial="hidden"
             animate={controls}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            style={{ margin: "20px 0" }}
+            transition={{ duration, ease: "easeIn", delay }}
+            className={className}
         >
             {children}
         </motion.div>

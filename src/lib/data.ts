@@ -1,13 +1,13 @@
 
 // Service Icons
-import services1 from '../assets/servicesImages/img1.svg';
-import services2 from '../assets/servicesImages/img2.svg';
-import services3 from '../assets/servicesImages/img3.svg';
-import services4 from '../assets/servicesImages/img4.svg';
-import services5 from '../assets/servicesImages/img5.svg';
-import services6 from '../assets/servicesImages/img6.svg';
-import services7 from '../assets/servicesImages/img7.svg';
-import services8 from '../assets/servicesImages/img8.svg';
+import services1 from '../assets/servicesImages/img1.webp';
+import services2 from '../assets/servicesImages/img2.webp';
+import services3 from '../assets/servicesImages/img3.webp';
+import services4 from '../assets/servicesImages/img4.webp';
+import services5 from '../assets/servicesImages/img5.webp';
+import services6 from '../assets/servicesImages/img6.webp';
+import services7 from '../assets/servicesImages/img7.webp';
+import services8 from '../assets/servicesImages/img8.webp';
 
 // testimonial profiles
 import img1 from '../assets/testimonials/img1.svg';
@@ -98,4 +98,12 @@ export const testimonial: TestimonialType[] = [
         ratings: 5,
         review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
     }
+]
+
+export const navigations = [
+    { title: "Home", to: "home" },
+    { title: "About Us", to: "about" },
+    { title: "Services", to: "service" },
+    { title: "Testimonial", to: "testimonial" },
+    { title: "Contact Us", to: "contact" }
 ]

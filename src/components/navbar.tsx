@@ -3,8 +3,10 @@ import { CgMenuLeft as MenuIcon } from "react-icons/cg";
 import { RxCross2 as Cross } from "react-icons/rx";
 import { FaArrowRight as ArrowRight } from "react-icons/fa";
 
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.webp';
 import { Button } from './ui/button';
+import { navigations } from '@/lib/data';
+import { scrollTo } from '@/lib/utils';
 
 
 interface Props {
@@ -15,22 +17,6 @@ interface Props {
 const Navbar = ({ className, activeSection }: Props) => {
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
-
-    const scrollTo = (id: string) => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-        }
-    };
-
-
-    const navigation = [
-        { title: "Home", to: "home" },
-        { title: "About Us", to: "about" },
-        { title: "Services", to: "service" },
-        { title: "Testimonial", to: "testimonial" },
-        { title: "Contact Us", to: "contact" }
-    ]
 
     return (
         <nav className={`w-full absolute z-40 md:text-sm ${className}`}>
@@ -71,7 +57,7 @@ const Navbar = ({ className, activeSection }: Props) => {
                     }
                     <ul className={`justify-end items-center space-y-6 md:flex md:space-x-6 md:space-y-0 ${sidebarOpen ? 'px-2 mt-4' : ''}`}>
                         {
-                            navigation.map((item, idx) => {
+                            navigations.map((item, idx) => {
                                 return (
                                     <li key={idx} className="flex justify-center md:justify-start">
                                         <Button onClick={() => { scrollTo(item.to); setSidebarOpen(false) }} className={`bg-gradient-to-r from-[#006CFC] to-[#00DDE8] bg-clip-text hover:text-transparent text-md md:text-lg font-medium ${activeSection == item.to ? 'text-transparent' : 'text-white'}`}>
