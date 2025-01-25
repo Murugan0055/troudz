@@ -1,8 +1,10 @@
 import { FaFacebook as FB, FaInstagram as Insta, FaYoutube as YT } from "react-icons/fa";
 import { FaXTwitter as X } from "react-icons/fa6";
+
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Separator } from './ui/separator';
+
 import { navigations } from "@/lib/data";
 import { scrollTo } from "@/lib/utils";
 

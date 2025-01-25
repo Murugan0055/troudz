@@ -97,6 +97,27 @@ export const testimonial: TestimonialType[] = [
         name: "Bruce Praison",
         ratings: 5,
         review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
+    },
+    {
+        id: 1,
+        img: img1,
+        name: "Benioff Marrc ",
+        ratings: 5,
+        review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
+    },
+    {
+        id: 2,
+        img: img2,
+        name: "Gomez Selena", 
+        ratings: 5,
+        review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
+    },
+    {
+        id: 3,
+        img: img3,
+        name: "Praison Bruce",
+        ratings: 5,
+        review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
     }
 ]
 

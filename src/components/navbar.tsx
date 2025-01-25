@@ -1,10 +1,13 @@
 import { useState } from 'react';
+
 import { CgMenuLeft as MenuIcon } from "react-icons/cg";
 import { RxCross2 as Cross } from "react-icons/rx";
 import { FaArrowRight as ArrowRight } from "react-icons/fa";
 
 import logo from '../assets/logo.webp';
+
 import { Button } from './ui/button';
+
 import { navigations } from '@/lib/data';
 import { scrollTo } from '@/lib/utils';
 

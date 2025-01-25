@@ -1,54 +1,50 @@
-import { Button } from "@/components/ui/button";
 import { testimonial } from "@/lib/data";
-import { useState } from "react";
-import { FaArrowLeft as ArrowLeft, FaArrowRight as ArrowRight, } from "react-icons/fa";
+import { useEffect, useRef } from "react";
 
 // Testimonial card
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { TestimonialType } from "@/lib/types";
+import { motion } from "framer-motion";
 import { FaStar as Star } from "react-icons/fa";
+import TiltedCard from "./animations/reactbits/TiltedCard";
 
+export const TestimonialCarousels: React.FC = () => {
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-const TestimonialCarousel = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const duplicateTestimonials = [...testimonial, ...testimonial];
 
-    const handleNext = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex + 3 >= testimonial.length ? 0 : prevIndex + 3
-        );
+    const startInfiniteScroll = () => {
+        if (scrollContainerRef.current) {
+            const container = scrollContainerRef.current;
+
+            const scroll = () => {
+                if (container.scrollLeft >= container.scrollWidth / 2) {
+                    container.scrollLeft = 0; // Reset scroll position when reaching the duplicate's end
+                }
+                container.scrollLeft += 1; // Adjust the increment for speed
+            };
+
+            const scrollInterval = setInterval(scroll, 16); // ~60fps for smooth scrolling
+
+            return () => clearInterval(scrollInterval); // Clear interval on cleanup
+        }
     };
 
-    const handlePrevious = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex - 3 < 0 ? testimonial.length - (testimonial.length % 3 || 3) : prevIndex - 3
-        );
-    };
+    useEffect(() => {
+        const cleanup = startInfiniteScroll();
+        return cleanup; // Cleanup function
+    }, []);
 
     return (
-        <div className="relative w-full md:py-12">
-            {/* Carousel Container */}
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-2 place-items-center place-content-center">
-                {
-                    testimonial.slice(currentIndex, currentIndex + 3).map((e, i) => (
-                        <TestimonialCard key={i} className={i == 1 ? ' md:py-24 md:bg-[#1B255E] ' : ' md:h-fit '} testimonial={e} />
-                    ))
-                }
-            </div>
-
-            {/* Navigation Buttons */}
+        <motion.div ref={scrollContainerRef} className="flex gap-5 overflow-x-scroll no-scrollbar w-full  py-16 px-10 ">
             {
-                testimonial.length > 3 ? (
-                    <>
-                        <Button className="absolute top-[45%] -left-10 border-gray-600 border bg-none bg-black p-5 py-7" onClick={handlePrevious} >
-                            <ArrowLeft />
-                        </Button>
-                        <Button className="absolute top-[45%] -right-10 border-gray-600 border bg-none bg-black p-5 py-7" onClick={handleNext} >
-                            <ArrowRight />
-                        </Button>
-                    </>
-                ) : null
+                duplicateTestimonials.map((e, i) => (
+                    <TiltedCard key={i} scaleOnHover={1.1} rotateAmplitude={14}>
+                        <TestimonialCard className="w-[350px]" testimonial={e} />
+                    </TiltedCard>
+                ))
             }
-        </div>
+        </ motion.div>
     );
 };
 
@@ -57,7 +53,7 @@ interface Props {
     className: string
 }
 
-function TestimonialCard({ testimonial, className }: Props) {
+export function TestimonialCard({ testimonial, className }: Props) {
     return (
         <Card className={` py-12 px-2 bg-gray-900 border-none hover:bg-[#1B255E] transform transition-transform duration-1000 cursor-pointer ${className}`}>
             <div className="h-24 w-auto p-4 absolute -top-10 left-[40%] bg-black rounded-full overflow-hidden flex justify-center items-center">
@@ -81,4 +77,3 @@ function TestimonialCard({ testimonial, className }: Props) {
     )
 }
 
-export default TestimonialCarousel;
