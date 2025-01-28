@@ -10,6 +10,7 @@ import { Button } from './ui/button';
 
 import { navigations } from '@/lib/data';
 import { scrollTo } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 
 interface Props {
@@ -25,14 +26,14 @@ const Navbar = ({ className, activeSection }: Props) => {
         <nav className={`w-screen absolute z-40 md:text-sm ${className}`}>
             <div className={`items-center md:flex md:px-8 px-4`}>
                 <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                    <a href="/">
+                    <Link to="/">
                         <img
                             src={logo}
                             width={40}
                             height={40}
                             alt="Float UI logo"
                         />
-                    </a>
+                    </Link>
                     <div className="md:hidden">
                         <button className="text-white text-2xl bg-none" onClick={() => setSidebarOpen(!sidebarOpen)}>
                             <MenuIcon />
@@ -43,15 +44,6 @@ const Navbar = ({ className, activeSection }: Props) => {
                     {
                         sidebarOpen ? (
                             <div className='flex justify-end px-5 pt-2'>
-                                {/* <a href="/">
-                                    <img
-                                        src={logo}
-                                        width={40}
-                                        height={40}
-                                        alt="Float UI logo"
-                                        className='mb-5'
-                                    />
-                                </a> */}
                                 <button className="text-white text-xl bg-none" onClick={() => setSidebarOpen(!sidebarOpen)}>
                                     <Cross className='z-20' />
                                 </button>
@@ -72,10 +64,10 @@ const Navbar = ({ className, activeSection }: Props) => {
                         }
                         <div className='items-center justify-center flex'>
                             <Button>
-                                <a href="/" className="flex items-center justify-center gap-2 py-3 px-4 md:px-3 text-[15px] font-bold text-center text-white active:shadow-none shadow ">
+                                <Link to="/get-started" className=" px-3 flex items-center justify-center gap-2  text-[15px] font-bold text-center text-white">
                                     GET STARTED
                                     <ArrowRight />
-                                </a>
+                                </Link>
                             </Button>
                         </div>
                     </ul>

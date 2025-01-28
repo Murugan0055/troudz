@@ -10,9 +10,9 @@ import { scrollTo } from "@/lib/utils";
 
 
 
-function Footer() {
+function Footer({ className = "" }: { className?: string }) {
     return (
-        <footer className="z-20 mx-auto w-full px-4 sm:px-6 lg:px-20 pt-14 pb-5 lg:grid lg:grid-cols-1">
+        <footer className={`z-20 mx-auto w-full px-4 sm:px-6 lg:px-20 pt-14 pb-5 lg:grid lg:grid-cols-1 ${className} `}>
             <div className="grid grid-cols-4 gap-8 sm:grid-cols-5">
                 <div className="col-span-3 md:col-span-2 max-w-3xl sm:order-last">
                     <div className="space-y-5">

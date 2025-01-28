@@ -36,15 +36,24 @@ export const TestimonialCarousels: React.FC = () => {
     }, []);
 
     return (
-        <motion.div ref={scrollContainerRef} className="flex gap-5 overflow-x-scroll no-scrollbar w-full  py-16 px-10 ">
+        <motion.div ref={scrollContainerRef} className="flex gap-5 overflow-x-scroll no-scrollbar w-full py-7 sm:py-16 px-10 ">
             {
-                duplicateTestimonials.map((e, i) => (
-                    <TiltedCard key={i} scaleOnHover={1.1} rotateAmplitude={14}>
-                        <TestimonialCard className="w-[350px]" testimonial={e} />
-                    </TiltedCard>
-                ))
+                duplicateTestimonials.map((e, i) => {
+                    if (window.innerWidth >= 600) {
+                        return (
+                            <TiltedCard key={i} scaleOnHover={1} rotateAmplitude={14}>
+                                <TestimonialCard className="w-[350px]" testimonial={e} />
+                            </TiltedCard>
+                        )
+                    }
+                    return (
+                        <div key={i} >
+                            <TestimonialCard className="w-[350px]" testimonial={e} />
+                        </div>
+                    )
+                })
             }
-        </ motion.div>
+        </ motion.div >
     );
 };
 
@@ -77,3 +86,4 @@ export function TestimonialCard({ testimonial, className }: Props) {
     )
 }
 
+export default TestimonialCarousels;
