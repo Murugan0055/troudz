@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState, Suspense, lazy } from 'react';
+import { useEffect, useRef, useState, Suspense, lazy, Key } from 'react';
 
 // Lazy loading components
 const Footer = lazy(() => import('../components/footer'));
@@ -130,10 +130,10 @@ function Home() {
                 ) : (
                   <BlurText
                     text="Transforming"
-                    delay={150}
+                    delay={100}
                     animateBy="letters"
                     direction="top"
-                    onAnimationComplete={() => console.log("text")}
+                    onAnimationComplete={() => null}
                     className="text-3xl sm:text-5xl font-syne"
                   />
                 )
@@ -147,7 +147,7 @@ function Home() {
                     delay={200}
                     animateBy="letters"
                     direction="top"
-                    onAnimationComplete={() => console.log("text")}
+                    onAnimationComplete={() => null}
                     className="text-3xl sm:text-5xl font-syne syne text-gradient"
                   />
                 )
@@ -158,10 +158,10 @@ function Home() {
                 ) : (
                   <BlurText
                     text="with"
-                    delay={150}
+                    delay={250}
                     animateBy="letters"
                     direction="top"
-                    onAnimationComplete={() => console.log("text")}
+                    onAnimationComplete={() => setTextLoaded(true)}
                     className="text-3xl sm:text-5xl font-syne"
                   />
                 )
@@ -175,7 +175,7 @@ function Home() {
                     delay={150}
                     animateBy="letters"
                     direction="top"
-                    onAnimationComplete={() => setTextLoaded(true)}
+                    onAnimationComplete={(() => null)}
                     className="text-3xl sm:text-5xl font-syne text-gradient"
                   />
                 )
@@ -187,7 +187,7 @@ function Home() {
 
           <Magnet padding={100} disabled={false} magnetStrength={10}>
             <Button className="mt-4">
-              <Link to="/get-started" className="flex items-center justify-center gap-2 px-4 text-[15px] bg-none w-fit font-bold text-center text-white">
+              <Link to="/get-started" className="flex items-center justify-center gap-2 px-4 py-0.5 text-[15px] bg-none w-fit font-bold text-center text-white">
                 GET STARTED
                 <ArrowRight />
               </Link>
@@ -304,7 +304,7 @@ function Home() {
             </div>
             <div className='flex flex-wrap mt-5 md:p-7 justify-center items-stretch'>
               {
-                services.map((e, i) => {
+                services.map((e: { id: number; title: string; img: string; para: string; link: string; }, i: Key | null | undefined) => {
                   return (
                     <div className={`z-20 p-1.5 w-full sm:w-1/2 ${[4, 5].includes(e.id) ? ' lg:w-2/5 ' : ' lg:w-1/3 '}`}>
                       <ServiceCard key={i} title={e.title} img={e.img} id={e.id} para={e.para} link={e.link} />
@@ -350,9 +350,7 @@ function Home() {
             ) : null
           }
         </>
-        <Section id='contact' setActiveSection={(id: string) => setActiveSection(id)} className="">
-          <Footer />
-        </Section>
+        <Footer />
       </Suspense >
     </div >
   )

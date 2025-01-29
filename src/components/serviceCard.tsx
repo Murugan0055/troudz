@@ -15,10 +15,10 @@ function ServiceCard(data: ServicesType) {
                         <h2 className="text-xl font-semibold tracking-wide">{data.title}</h2>
                         <p className="text-gray-300">{data.para}</p>
                     </div>
-                    <Link to={`/service/ai`} type="button" className="text-gradient w-full font-semibold tracking-wide rounded-md">LEARN MORE</Link>
+                    <Link to={data.link} type="button" className="text-gradient w-full font-semibold tracking-wide rounded-md">LEARN MORE</Link>
                 </div>
             </SpotlightCard>
-        </FadeInOnScroll>
+        </FadeInOnScroll >
     )
 }
 

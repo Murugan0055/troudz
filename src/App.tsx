@@ -6,6 +6,7 @@ import Home from './pages/home';
 import NotFound from './pages/notFound';
 import GetStarted from './pages/getStarted';
 import Services from './pages/services';
+import Partnership from './pages/partnership';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/service/:id" element={<Services />} />
+          <Route path="/partnership" element={<Partnership />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

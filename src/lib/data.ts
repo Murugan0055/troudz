@@ -1,13 +1,13 @@
 
 // Service Icons
-import services1 from '../assets/servicesImages/img1.webp';
-import services2 from '../assets/servicesImages/img2.webp';
-import services3 from '../assets/servicesImages/img3.webp';
-import services4 from '../assets/servicesImages/img4.webp';
-import services5 from '../assets/servicesImages/img5.webp';
-import services6 from '../assets/servicesImages/img6.webp';
-import services7 from '../assets/servicesImages/img7.webp';
-import services8 from '../assets/servicesImages/img8.webp';
+import service1 from '../assets/servicesImages/img1.webp';
+import service2 from '../assets/servicesImages/img2.webp';
+import service3 from '../assets/servicesImages/img3.webp';
+import service4 from '../assets/servicesImages/img4.webp';
+import service5 from '../assets/servicesImages/img5.webp';
+import service6 from '../assets/servicesImages/img6.webp';
+import service7 from '../assets/servicesImages/img7.webp';
+import service8 from '../assets/servicesImages/img8.webp';
 
 // testimonial profiles
 import img1 from '../assets/testimonials/img1.svg';
@@ -21,63 +21,63 @@ import { IoLocationOutline as Location } from "react-icons/io5";
 import { CiPhone as Phone, CiMail as Mail } from "react-icons/ci";
 
 
-//Services Info
+//service Info
 export const services: ServicesType[] = [
     {
         id: 1,
-        img: services1,
+        img: service1,
         title: "Intelligent Task Automation",
         para: "Automate tasks, improve efficiency, and support smarter decision-making, optimizing business operations with minimal human intervention.",
-        link: "/services"
+        link: "/service/intelligent-task-automation"
     },
     {
         id: 2,
-        img: services2,
+        img: service2,
         title: "AI-Powered Assistants",
         para: "Leverage natural language processing to assist users in completing tasks, boosting productivity, and enhancing customer service interactions.",
-        link: "/services"
+        link: "/service/ai-power-assitants"
     },
     {
         id: 3,
-        img: services3,
+        img: service3,
         title: "AI-Enhanced Copilots",
         para: "Support human performance and decision-making in specific domains, fostering collaboration and enhancing overall efficiency.",
-        link: "/services"
+        link: "/service/ai-enhanced-copilots"
     },
     {
         id: 4,
-        img: services4,
+        img: service4,
         title: "Smart Conversational Solutions",
         para: "Streamline business operations, elevate customer service, and provide personalized interactions that drive satisfaction and engagement.",
-        link: "/services"
+        link: "/service/smart-conversational-solutions"
     },
     {
         id: 5,
-        img: services5,
+        img: service5,
         title: "Predictive Insights",
         para: "Analyze historical data to predict future trends, behaviors, and outcomes, enabling businesses to make data-driven decisions with confidence.",
-        link: "/services"
+        link: "/service/predictive-insights"
     },
     {
         id: 6,
-        img: services6,
+        img: service6,
         title: "Data Intelligence & Enrichment",
         para: "Enhance business intelligence by providing valuable insights that foster competitiveness in today's data-driven marketplaces.",
-        link: "/services"
+        link: "/service/data-intelligent-enrichment"
     },
     {
         id: 7,
-        img: services7,
+        img: service7,
         title: "AI-Driven Creativity and Strategy",
         para: "Empower human creativity and strategy by automating repetitive tasks, freeing up time for higher-value and impactful endeavors.",
-        link: "/services"
+        link: "/service/ai-driven-creativity-strategy"
     },
     {
         id: 8,
-        img: services8,
+        img: service8,
         title: "Resource Management & Optimization",
         para: "Efficiently manage and allocate resources, ensuring that businesses are equipped with the right talent and tools to drive success and maximize productivity.",
-        link: "/services"
+        link: "/service/resource-management-optimization"
     }
 ]
 
@@ -133,7 +133,7 @@ export const navigations = [
     { title: "About Us", to: "about" },
     { title: "Services", to: "service" },
     { title: "Testimonial", to: "testimonial" },
-    { title: "Contact Us", to: "contact" }
+    { title: "Partnership", to: "partnership" }
 ]
 
 //Contacts
