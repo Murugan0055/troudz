@@ -2,7 +2,6 @@ import { Separator } from "@/components/ui/separator";
 import { IoMdArrowRoundBack as ArrowLeft } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
 
-
 function Services() {
     const { id } = useParams();
 

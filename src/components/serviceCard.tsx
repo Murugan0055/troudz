@@ -1,7 +1,6 @@
-import { ServicesType } from "@/lib/types";
-import SpotlightCard from "./animations/reactbits/SpotlightCard.js";
+import { ServicesType } from "@/lib/types.js";
 import FadeInOnScroll from "./animations/fadeIn.js";
-import { Link } from "react-router-dom";
+import SpotlightCard from "./animations/reactbits/SpotlightCard.js";
 
 function ServiceCard(data: ServicesType) {
     return (
@@ -15,7 +14,7 @@ function ServiceCard(data: ServicesType) {
                         <h2 className="text-xl font-semibold tracking-wide">{data.title}</h2>
                         <p className="text-gray-300">{data.para}</p>
                     </div>
-                    <Link to={data.link} type="button" className="text-gradient w-full font-semibold tracking-wide rounded-md">LEARN MORE</Link>
+                    {/* <Link to={data.link} type="button" className="text-gradient w-full font-semibold tracking-wide rounded-md">LEARN MORE</Link> */}
                 </div>
             </SpotlightCard>
         </FadeInOnScroll >

@@ -69,7 +69,6 @@ function Home() {
       appElement.addEventListener("scroll", handleScroll);
     }
 
-
     return () => {
       if (appElement) {
         appElement.removeEventListener("scroll", handleScroll);
@@ -185,14 +184,14 @@ function Home() {
 
           <p className="mx-auto mt-4 sm:text-xl/relaxed font-syne"> Troudz delivers AI-driven solutions to accelerate innovation and business success. </p>
 
-          <Magnet padding={100} disabled={false} magnetStrength={10}>
-            <Button className="mt-4">
+          <Button className="mt-4 w-fit mx-auto">
               <Link to="/get-started" className="flex items-center justify-center gap-2 px-4 py-0.5 text-[15px] bg-none w-fit font-bold text-center text-white">
                 GET STARTED
                 <ArrowRight />
               </Link>
             </Button>
-          </Magnet>
+
+          {/* <Magnet padding={100} disabled={false} magnetStrength={10}> </Magnet> */}
 
           <FadeInOnScroll direction="bottom" delay={0.3} duration={0.4}>
             <img src={banner} alt="Banner Image" className='w-full sm:w-4/5 md:w-3/5 mx-auto mt-14' />

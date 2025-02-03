@@ -133,7 +133,7 @@ export const navigations = [
     { title: "About Us", to: "about" },
     { title: "Services", to: "service" },
     { title: "Testimonial", to: "testimonial" },
-    { title: "Partnership", to: "partnership" }
+    // { title: "Partnership", to: "partnership" }
 ]
 
 //Contacts
