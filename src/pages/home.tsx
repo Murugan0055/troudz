@@ -97,7 +97,7 @@ function Home() {
         <div ref={topRef}></div>
         <Navbar className={navStyle} activeSection={activeSection} />
         {/* Banner */}
-        <Section id="home" setActiveSection={(id: string) => setActiveSection(id)} className="w-full h-screen text-center px-3 pt-52 lg:px-10 flex flex-col justify-end" >
+        <Section id="home" setActiveSection={(id: string) => setActiveSection(id)} className="w-full min-h-scren h-fit text-center px-3 pt-36 md:pt-32 lg:px-10 flex flex-col justify-end" >
           <div className="relative ">
             <>
               <div className="absolute h-9 md:h-12 w-auto -top-20 sm:-top-24 left-8 sm:left-56 drop-shadow-[0_0_25px_rgba(255,255,255)]">
