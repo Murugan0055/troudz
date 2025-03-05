@@ -10,9 +10,9 @@ import service7 from '../assets/servicesImages/img7.webp';
 import service8 from '../assets/servicesImages/img8.webp';
 
 // testimonial profiles
-import img1 from '../assets/testimonials/img1.svg';
-import img2 from '../assets/testimonials/img2.svg';
-import img3 from '../assets/testimonials/img3.svg';
+import img1 from '../assets/testimonials/drev-modified.png';
+import img2 from '../assets/testimonials/agamathi-modified.png';
+import img3 from '../assets/testimonials/base2geeks-modified.png';
 
 import { ServicesType, TestimonialType } from './types';
 
@@ -86,46 +86,26 @@ export const testimonial: TestimonialType[] = [
     {
         id: 1,
         img: img1,
-        name: "Marrc Benioff",
+        name: "DataReveal",
         ratings: 5,
-        review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
+        review: "An outstanding experience! The accuracy and efficiency exceeded our expectations. Highly recommended!"
     },
     {
         id: 2,
         img: img2,
-        name: "Selena Gomez",
+        name: "Agamathikalvi",
         ratings: 5,
-        review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
+        review: "Exceptional service and support! The team truly understands the needs of their users. A game-changer!"
     },
     {
         id: 3,
         img: img3,
-        name: "Bruce Praison",
+        name: "Base2Geeks",
         ratings: 5,
-        review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
-    },
-    {
-        id: 1,
-        img: img1,
-        name: "Benioff Marrc ",
-        ratings: 5,
-        review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
-    },
-    {
-        id: 2,
-        img: img2,
-        name: "Gomez Selena",
-        ratings: 5,
-        review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
-    },
-    {
-        id: 3,
-        img: img3,
-        name: "Praison Bruce",
-        ratings: 5,
-        review: "Empower human creativity and strategy by automating repetitive tasks, allowing for a focus on innovative and impactful endeavors."
+        review: "Professional and reliable. Their expertise made a huge difference for us. Would definitely work with them again!"
     }
-]
+];
+
 
 //Navigations
 export const navigations = [

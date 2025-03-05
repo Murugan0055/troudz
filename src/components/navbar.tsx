@@ -62,14 +62,7 @@ const Navbar = ({ className, activeSection }: Props) => {
                                 )
                             })
                         }
-                        <div className='items-center justify-center flex'>
-                            <Button>
-                                <Link to="/get-started" className=" px-3 py-0.5 flex items-center justify-center gap-2  text-[15px] font-bold text-center text-white">
-                                    GET STARTED
-                                    <ArrowRight />
-                                </Link>
-                            </Button>
-                        </div>
+                        
                     </ul>
                 </div>
             </div>
