@@ -30,7 +30,6 @@ import { Link } from "react-router-dom";
 const FadeInOnScroll = lazy(() => import("../components/animations/fadeIn"));
 const Shake = lazy(() => import('../components/animations/shake'));
 const FlipText = lazy(() => import("../components/animations/wordFlip"));
-const Magnet = lazy(() => import("../components/animations/reactbits/Magnet"));
 const BlurText = lazy(() => import("../components/animations/reactbits/BlurText"));
 
 function Home() {
